@@ -1,0 +1,8 @@
+﻿<h1>Testing Login</h1>
+<div>
+    User's lists
+    <ul>
+        <li *ngFor="let list of lists">{{list.name}}</li>
+    </ul>
+</div>
+<p><a [routerLink]="['/login']">Logout</a></p>
