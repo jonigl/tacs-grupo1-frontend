@@ -13,9 +13,7 @@ export class EventService {
     constructor(private http: HttpClient) { }
 
     search(filter: EventFilter, page: number = 0) {
-        const params: any = { page: page, filter};
-
-        console.log(params.toString());
+        const params: any = Object.assign({ page: page }, filter);
 
         return this.http.get<RestPage<Event>>(
             `${environment.apiUrl}/events`,
