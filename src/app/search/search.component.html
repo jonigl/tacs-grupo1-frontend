@@ -1,0 +1,8 @@
+<h1>Search events</h1>
+<div>
+    Search result for "java"
+    <ul>
+        <li *ngFor="let event of events">{{ event.name }}</li>
+    </ul>
+</div>
+<p><a [routerLink]="['/login']">Logout</a></p>
