@@ -1,0 +1,38 @@
+.search-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-form > * {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.search-keyword-field {
+    font-size: 18px;
+}
+
+.search-result-card {
+    min-height: 50%;
+}
+
+.search-result-spinner {
+    margin: 0 auto;
+}
+
+.masonry-container {
+    margin: 0 auto;
+}
+
+.masonry-item {
+    width: 350px;
+    margin: 8px;
+}
+
+.event-card-content {
+    overflow-wrap: break-word;
+}
+
+.event-action-button {
+    margin: 8px;
+}

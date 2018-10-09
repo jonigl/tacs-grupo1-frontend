@@ -1,0 +1,55 @@
+<mat-toolbar>
+    <span>Search events</span>
+</mat-toolbar>
+
+<mat-card class="search-result-card">
+
+    <form class="search-form" [formGroup]="searchForm">
+
+        <mat-form-field class="search-keyword-field" (change)="onChange()">
+            <input matInput class="search-keyword-input" type="search" formControlName="keywordControl" placeholder="Search on Eventbrite">
+
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+    </form>
+
+    <mat-card-header>
+
+        <mat-spinner class="search-result-spinner" *ngIf="loading"></mat-spinner>
+
+    </mat-card-header>
+
+    <ngx-masonry class="masonry-container" [options]='{ "fitWidth": true }'>
+        <ngxMasonryItem class="masonry-item" *ngFor="let event of events">
+
+            <mat-card class="event-card">
+
+                <mat-card-header>
+                    <mat-card-title class="event-card-title">
+                        <b>{{event.name}}</b>
+                    </mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content class="event-card-content">
+                    <p>{{event.description}}</p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <a mat-stroked-button class="event-action-button" color="primary" [href]="event.url" target="_blank">
+                        Check event
+                    </a>
+
+                    <button mat-stroked-button class="event-action-button" color="accent">Add to my list</button>
+                </mat-card-actions>
+
+            </mat-card>
+
+        </ngxMasonryItem>
+    </ngx-masonry>
+
+</mat-card>
+
+<p>
+    <a [routerLink]="['/login']">Logout</a>
+</p>

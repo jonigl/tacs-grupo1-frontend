@@ -1,6 +1,5 @@
-﻿import { List } from './List';
-export class RestPage {
-    content: List[];
+export class RestPage<T> {
+    content: T[];
     numberOfElements: number;
     page: number;
     perPage: number;
