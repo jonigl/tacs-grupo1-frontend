@@ -8,6 +8,10 @@
     margin: 0 auto;
 }
 
+.search-keyword-field {
+    font-size: 18px;
+}
+
 .search-result-card {
     min-height: 50%;
 }
@@ -21,7 +25,7 @@
 }
 
 .masonry-item {
-    width: 400px;
+    width: 350px;
     margin: 8px;
 }
 

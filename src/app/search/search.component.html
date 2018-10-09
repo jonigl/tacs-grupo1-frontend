@@ -7,12 +7,9 @@
     <form class="search-form" [formGroup]="searchForm">
 
         <mat-form-field class="search-keyword-field" (change)="onChange()">
-            <input matInput class="search-keyword-input" formControlName="keywordControl" placeholder="keyword">
+            <input matInput class="search-keyword-input" type="search" formControlName="keywordControl" placeholder="Search on Eventbrite">
 
-            <!-- search icon -->
-            <span matSuffix>
-                <i class="material-icons">search</i>
-            </span>
+            <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
 
     </form>
