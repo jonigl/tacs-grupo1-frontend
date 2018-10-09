@@ -1,10 +1,28 @@
 <mat-card class="search-result-card">
+
+    <h2>Search events</h2>
+
+    <form class="search-form" [formGroup]="searchForm">
+
+        <mat-form-field class="search-keyword-field" (change)="onChange()">
+            <input matInput class="search-keyword-input" formControlName="keywordControl" placeholder="keyword">
+
+            <!-- search icon -->
+            <span matSuffix>
+                <i class="material-icons">search</i>
+            </span>
+        </mat-form-field>
+
+    </form>
+
     <mat-card-header>
-        <h2>Search result:</h2>
+
+        <mat-spinner class="search-result-spinner" *ngIf="loading"></mat-spinner>
+
     </mat-card-header>
 
-    <mat-grid-list cols="3" rowHeight="200px">
-        <mat-spinner *ngIf="loading"></mat-spinner>
+    <mat-grid-list class="search-result-grid-list" cols="3" rowHeight="2:1">
+
         <mat-grid-tile *ngFor="let event of events">
             <mat-card class="event-card">
 
