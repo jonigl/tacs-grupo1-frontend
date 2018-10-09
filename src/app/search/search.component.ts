@@ -11,6 +11,8 @@ import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class SearchComponent implements OnInit {
 
+    gridCols: number;
+
     searchForm: FormGroup;
     searchFormControl = new FormControl('');
 
@@ -22,10 +24,15 @@ export class SearchComponent implements OnInit {
         private eventService: EventService) { }
 
     ngOnInit() {
+        this.setGridCols();
+
         this.searchForm = this.formBuilder.group({
             keywordControl: ['']
         });
+    }
 
+    setGridCols() {
+        this.gridCols = window.innerWidth / 400;
     }
 
     getControls() {

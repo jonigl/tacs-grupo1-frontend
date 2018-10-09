@@ -3,7 +3,7 @@
         <button mat-icon-button (click)="snav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
-        <h1 class="example-app-name">Responsive App</h1>
+        <h1 class="example-app-name">Event App</h1>
     </mat-toolbar>
 
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
@@ -11,20 +11,22 @@
             fixedTopGap="56">
             <mat-nav-list>
                 <!-- User -->
-                <a mat-list-item routerLink="/search">Search Events</a><br>
-                <a mat-list-item href="#">My Lists</a><br>
-                <a mat-list-item href="#">My Alarms</a><br>
-                <a mat-list-item href="#">Manage</a><br>
+                <a mat-list-item routerLink="/search">Search Events</a>
+                <a mat-list-item href="#">My Lists</a>
+                <a mat-list-item href="#">My Alarms</a>
+                <a mat-list-item href="#">Manage</a>
                 <!-- Admin -->
-                <a mat-list-item href="#">Users</a><br>
-                <a mat-list-item href="#">Statics</a><br>
-                <a mat-list-item href="#">Compare Lists</a><br>
+                <a mat-list-item href="#">Users</a>
+                <a mat-list-item href="#">Statics</a>
+                <a mat-list-item href="#">Compare Lists</a>
                 <a mat-list-item href="#"></a>
             </mat-nav-list>
         </mat-sidenav>
 
         <mat-sidenav-content>
-            <router-outlet></router-outlet>
+            <div class="content-container">
+                <router-outlet></router-outlet>
+            </div>
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>
