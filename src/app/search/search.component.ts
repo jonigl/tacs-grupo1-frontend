@@ -10,6 +10,7 @@ import { Event } from 'src/app/_models/Event';
 })
 export class SearchComponent implements OnInit {
 
+    loading: boolean;
     events: Event[];
 
     constructor(private eventService: EventService) { }
@@ -17,7 +18,9 @@ export class SearchComponent implements OnInit {
     ngOnInit() {
         const filter = new EventFilter();
         filter.q = 'java';
+        this.loading = true;
         this.eventService.search(filter).subscribe(page => {
+            this.loading = false;
             this.events = page.content;
         });
     }
