@@ -16,7 +16,19 @@
     margin: 0 auto;
 }
 
-.event-card {
-    width: calc(100% - 70px);
-    height: calc(100% - 70px);
+.masonry-container {
+    margin: 0 auto;
+}
+
+.masonry-item {
+    width: 400px;
+    margin: 8px;
+}
+
+.event-card-content {
+    overflow-wrap: break-word;
+}
+
+.event-action-button {
+    margin: 8px;
 }

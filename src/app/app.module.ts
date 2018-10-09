@@ -13,7 +13,8 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { SearchComponent } from './search/search.component';
-import { MatListModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule, MatProgressSpinnerModule, MatGridListModule } from '@angular/material';
+import { MatListModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule, MatProgressSpinnerModule } from '@angular/material';
+import { NgxMasonryModule } from 'ngx-masonry';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -33,8 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatToolbarModule,
         MatSidenavModule,
         MatListModule,
-        MatGridListModule,
-        FormsModule
+        FormsModule,
+        NgxMasonryModule
     ],
     declarations: [
         AppComponent,

@@ -23,21 +23,33 @@
 
     </mat-card-header>
 
-    <mat-grid-list class="search-result-grid-list" [cols]="gridCols" (window:resize)="setGridCols()">
+    <ngx-masonry class="masonry-container" [options]='{ "fitWidth": true }'>
+        <ngxMasonryItem class="masonry-item" *ngFor="let event of events">
 
-        <mat-grid-tile class="search-result-tile" *ngFor="let event of events">
-                <mat-card class="event-card">
+            <mat-card class="event-card">
 
-                    <mat-card-header>
-                        <mat-card-title class="event-card-title">{{event.name}}</mat-card-title>
-                        <mat-card-subtitle class="event-card-subtitle">{{event.description}}</mat-card-subtitle>
-                    </mat-card-header>
+                <mat-card-header>
+                    <mat-card-title class="event-card-title">
+                        <b>{{event.name}}</b>
+                    </mat-card-title>
+                </mat-card-header>
 
-                    <mat-card-content> </mat-card-content>
+                <mat-card-content class="event-card-content">
+                    <p>{{event.description}}</p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <a mat-stroked-button class="event-action-button" color="primary" [href]="event.url" target="_blank">
+                        Check event
+                    </a>
+
+                    <button mat-stroked-button class="event-action-button" color="accent">Add to my list</button>
+                </mat-card-actions>
 
             </mat-card>
-        </mat-grid-tile>
-    </mat-grid-list>
+
+        </ngxMasonryItem>
+    </ngx-masonry>
 
 </mat-card>
 
