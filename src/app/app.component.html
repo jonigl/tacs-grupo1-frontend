@@ -4,6 +4,7 @@
             <mat-icon>menu</mat-icon>
         </button>
         <h1 class="example-app-name">Event App</h1>
+        <a class="logout" [routerLink]="['/login']">Logout</a>
     </mat-toolbar>
 
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
@@ -11,10 +12,11 @@
             fixedTopGap="56">
             <mat-nav-list>
                 <!-- User -->
-                <a mat-list-item routerLink="/search">Search Events</a>
-                <a mat-list-item href="#">My Lists</a>
-                <a mat-list-item href="#">My Alarms</a>
-                <a mat-list-item href="#">Manage</a>
+                <a mat-list-item routerLink="/search">Search Events</a>        
+                <a [routerLink]="['/lists']">My Lists</a><br>
+                <a href="#">My Alarms</a><br>
+                <a href="#">Manage</a><br>
+
                 <!-- Admin -->
                 <a mat-list-item href="#">Users</a>
                 <a mat-list-item href="#">Statics</a>

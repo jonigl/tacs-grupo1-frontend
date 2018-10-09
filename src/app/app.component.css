@@ -8,6 +8,11 @@
     right: 0;
 }
 
+.logout{
+    position: absolute;
+    right: 50px;
+}
+
 .example-is-mobile .example-toolbar {
     position: fixed;
     /* Make sure the toolbar will stay on top of the content as it scrolls past. */

@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 
         // stop here if form is invalid
         if (this.loginForm.invalid) {
-            console.log("invalid");
+            console.log('invalid');
             return;
         }
 
