@@ -14,7 +14,7 @@ import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { SearchComponent } from './search/search.component';
 import { ListComponent } from './list/list.component';
-import { MatListModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatMenuModule, MatListModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule, MatProgressSpinnerModule } from '@angular/material';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -37,7 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatSidenavModule,
         MatListModule,
         FormsModule,
-        NgxMasonryModule
+        NgxMasonryModule,
+        MatMenuModule
     ],
     declarations: [
         AppComponent,

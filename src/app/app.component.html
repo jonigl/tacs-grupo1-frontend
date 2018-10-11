@@ -1,13 +1,24 @@
 ﻿<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    
     <mat-toolbar color="primary" class="example-toolbar">
+
         <button mat-icon-button (click)="snav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
+
         <h1 class="example-app-name">Event App</h1>
-        <a class="logout" [routerLink]="['/login']">Logout</a>
+        <span class="example-spacer"></span>
+
+        <button mat-button [matMenuTriggerFor]="menu">Session <mat-icon class="example-icon">account_box</mat-icon></button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Profile</button>
+          <button mat-menu-item [routerLink]="['/login']" >Logout</button>
+        </mat-menu>
+
     </mat-toolbar>
 
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+
         <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
             fixedTopGap="56">
             <mat-nav-list>
@@ -30,5 +41,7 @@
                 <router-outlet></router-outlet>
             </div>
         </mat-sidenav-content>
+
     </mat-sidenav-container>
+
 </div>
