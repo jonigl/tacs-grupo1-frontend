@@ -17,6 +17,7 @@ import { ListComponent } from './list/list.component';
 import { MatMenuModule, MatListModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule, MatProgressSpinnerModule } from '@angular/material';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatListModule,
         FormsModule,
         NgxMasonryModule,
-        MatMenuModule
+        MatMenuModule,
+        FlexLayoutModule
     ],
     declarations: [
         AppComponent,
