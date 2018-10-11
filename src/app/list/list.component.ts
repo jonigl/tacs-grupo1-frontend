@@ -5,6 +5,7 @@ import { ListService } from '../_services/list.service';
 import { first } from 'rxjs/operators';
 import { EditListDialogComponent } from './edit-list-dialog/edit-list-dialog.component';
 import { DeleteListDialogComponent } from './delete-list-dialog/delete-list-dialog.component';
+import { NewListDialogComponent } from './new-list-dialog/new-list-dialog.component';
 
 @Component({
   selector: 'app-list',
@@ -19,7 +20,7 @@ export class ListComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private listService: ListService, public dialog: MatDialog) {}
+  constructor(private listService: ListService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.listService.getAll().pipe(first()).subscribe(page => {
@@ -33,15 +34,32 @@ export class ListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  openNewDialog(): void {
+    const _this: ListComponent = this;
+    const dialogRef = this.dialog.open(NewListDialogComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(name => {
+      console.log('The dialog was closed');
+      if (name) {
+        const list: List = new List();
+        list.name = name;
+        _this.dataSource.data.push(list);
+        _this.listTable.renderRows();
+      }
+    });
+  }
+
   openEditDialog(index, list): void {
     const dialogRef = this.dialog.open(EditListDialogComponent, {
       width: '250px',
-      data: {list: list}
+      data: { list: list }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(name => {
       console.log('The dialog was closed');
-      list.name = result;
+      list.name = name;
     });
   }
 
@@ -49,7 +67,7 @@ export class ListComponent implements OnInit {
     const _this: ListComponent = this;
     const dialogRef = this.dialog.open(DeleteListDialogComponent, {
       width: '250px',
-      data: {list: list}
+      data: { list: list }
     });
 
     dialogRef.afterClosed().subscribe(result => {

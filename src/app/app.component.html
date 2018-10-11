@@ -8,8 +8,7 @@
 
         <h1 class="example-app-name">Event App</h1>
         <span class="example-spacer"></span>
-
-        <button mat-button [matMenuTriggerFor]="menu"><span>Session</span> <mat-icon class="example-icon">account_box</mat-icon></button>
+        <button mat-button [matMenuTriggerFor]="menu"><span>Session</span><mat-icon class="example-icon">account_box</mat-icon></button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item>Profile</button>
           <button mat-menu-item [routerLink]="['/login']" >Logout</button>

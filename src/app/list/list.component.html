@@ -2,7 +2,7 @@
     <span>Lists</span>
 </mat-toolbar>
 
-<mat-card class="lists-card"  fxLayout="column"  fxLayoutAlign="center">
+<mat-card class="lists-card" fxLayout="column" fxLayoutAlign="center">
 
     <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -18,9 +18,11 @@
 
         <!-- Star Column -->
         <ng-container matColumnDef="action" stickyEnd>
-            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
             <td mat-cell *matCellDef="let element; let i = index;">
-                <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+                <button mat-button [matMenuTriggerFor]="menu" matTooltip="Actions" aria-label="Actions">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item (click)="openEditDialog(i, element)">
                         <mat-icon>edit</mat-icon>
@@ -31,13 +33,18 @@
                         <span>Delete</span>
                     </button>
                 </mat-menu>
-                
+
             </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
     </table>
+    <mat-toolbar>
+        <span class="example-spacer"></span>
+        <button mat-fab (click)="openNewDialog()" color="primary" matTooltip="Add new list" aria-label="Add new list">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-toolbar>
 
 </mat-card>
