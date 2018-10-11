@@ -8,7 +8,7 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
 
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table #listTable [dataSource]="dataSource" matSort>
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
@@ -19,14 +19,14 @@
         <!-- Star Column -->
         <ng-container matColumnDef="action" stickyEnd>
             <th mat-header-cell *matHeaderCellDef>Action</th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element; let i = index;">
                 <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="openEditDialog(i, element)">
                         <mat-icon>edit</mat-icon>
                         <span>Edit</span>
                     </button>
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="openDeleteDialog(i, element)">
                         <mat-icon>delete</mat-icon>
                         <span>Delete</span>
                     </button>

@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { MatTable, MatSort, MatTableDataSource, MatDialog, _MatSortHeaderMixinBase } from '@angular/material';
 import { List } from '../_models/List';
 import { ListService } from '../_services/list.service';
 import { first } from 'rxjs/operators';
+import { EditListDialogComponent } from './edit-list-dialog/edit-list-dialog.component';
+import { DeleteListDialogComponent } from './delete-list-dialog/delete-list-dialog.component';
 
 @Component({
   selector: 'app-list',
@@ -10,13 +12,14 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+  @ViewChild('listTable') listTable: MatTable<Element>;
   lists: List[];
   dataSource: MatTableDataSource<List>;
   displayedColumns = ['name', 'action'];
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private listService: ListService) {}
+  constructor(private listService: ListService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.listService.getAll().pipe(first()).subscribe(page => {
@@ -28,6 +31,34 @@ export class ListComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  openEditDialog(index, list): void {
+    const dialogRef = this.dialog.open(EditListDialogComponent, {
+      width: '250px',
+      data: {list: list}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      list.name = result;
+    });
+  }
+
+  openDeleteDialog(index, list): void {
+    const _this: ListComponent = this;
+    const dialogRef = this.dialog.open(DeleteListDialogComponent, {
+      width: '250px',
+      data: {list: list}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result === true) {
+        _this.dataSource.data.splice(index, 1);
+        _this.listTable.renderRows();
+      }
+    });
   }
 
 }

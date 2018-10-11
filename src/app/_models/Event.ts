@@ -1,9 +1,9 @@
 enum Status {
-    CANCELED = "canceled",
-    LIVE = "live",
-    STARTED = "started",
-    ENDED = "ended",
-    COMPLETED = "completed"
+    CANCELED = 'canceled',
+    LIVE = 'live',
+    STARTED = 'started',
+    ENDED = 'ended',
+    COMPLETED = 'completed'
 }
 
 export class Event {

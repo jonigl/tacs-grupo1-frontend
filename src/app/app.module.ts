@@ -14,10 +14,12 @@ import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { SearchComponent } from './search/search.component';
 import { ListComponent } from './list/list.component';
-import { MatMenuModule, MatListModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatDialogModule, MatMenuModule, MatListModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule, MatProgressSpinnerModule } from '@angular/material';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';;
+import { DeleteListDialogComponent } from './list/delete-list-dialog/delete-list-dialog.component'
 
 
 @NgModule({
@@ -40,14 +42,21 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         FormsModule,
         NgxMasonryModule,
         MatMenuModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        MatDialogModule
     ],
     declarations: [
         AppComponent,
         HomeComponent,
         LoginComponent,
         SearchComponent,
-        ListComponent 
+        ListComponent ,
+        EditListDialogComponent,
+        DeleteListDialogComponent
+    ],
+    entryComponents: [
+        EditListDialogComponent,
+        DeleteListDialogComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
