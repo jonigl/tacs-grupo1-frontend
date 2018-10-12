@@ -34,6 +34,10 @@ export class ListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  getEvents(list) {
+    console.log(list);
+  }
+
   openNewDialog(): void {
     const _this: ListComponent = this;
     const dialogRef = this.dialog.open(NewListDialogComponent, {
