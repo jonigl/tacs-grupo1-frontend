@@ -15,9 +15,9 @@ export class EditListDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: List) {}
 
     onNoClick(): void {
-      this.dialogRef.close();
+      this.dialogRef.close(false);
     }
-    
+
     onEnter() {
       this.dialogRef.close(this.newName);
     }

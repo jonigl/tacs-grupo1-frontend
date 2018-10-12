@@ -14,7 +14,7 @@ export class NewListDialogComponent {
   constructor(public dialogRef: MatDialogRef<NewListDialogComponent>) {}
 
     onNoClick(): void {
-      this.dialogRef.close();
+      this.dialogRef.close(false);
     }
 
     onEnter() {

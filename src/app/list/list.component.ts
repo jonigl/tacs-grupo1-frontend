@@ -63,14 +63,16 @@ export class ListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(name => {
-      const listUpdated: List = new List();
-      listUpdated.id = list.id;
-      listUpdated.name = name;
-      this.loading = true;
-      this.listService.update(listUpdated).pipe(first()).subscribe(response => {
-        this.loading = false;
-        list.name = response.name;
-      });
+      if (name) {
+        const listUpdated: List = new List();
+        listUpdated.id = list.id;
+        listUpdated.name = name;
+        this.loading = true;
+        this.listService.update(listUpdated).pipe(first()).subscribe(response => {
+          this.loading = false;
+          list.name = response.name;
+        });
+      }
     });
   }
 
