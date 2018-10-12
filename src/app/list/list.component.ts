@@ -14,11 +14,12 @@ import { NewListDialogComponent } from './new-list-dialog/new-list-dialog.compon
 })
 export class ListComponent implements OnInit {
   @ViewChild('listTable') listTable: MatTable<Element>;
+  @ViewChild(MatSort) sort: MatSort;
   lists: List[];
   dataSource: MatTableDataSource<List>;
   displayedColumns = ['name', 'action'];
+  loading = false;
 
-  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private listService: ListService, public dialog: MatDialog) { }
 
@@ -41,25 +42,35 @@ export class ListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(name => {
-      console.log('The dialog was closed');
       if (name) {
         const list: List = new List();
         list.name = name;
-        _this.dataSource.data.push(list);
-        _this.listTable.renderRows();
+        this.loading = true;
+        this.listService.create(list).pipe(first()).subscribe(response => {
+          this.loading = false;
+          _this.dataSource.data.push(list);
+          _this.listTable.renderRows();
+        });
       }
     });
   }
 
   openEditDialog(index, list): void {
+    const _this: ListComponent = this;
     const dialogRef = this.dialog.open(EditListDialogComponent, {
       width: '250px',
       data: { list: list }
     });
 
     dialogRef.afterClosed().subscribe(name => {
-      console.log('The dialog was closed');
-      list.name = name;
+      const listUpdated: List = new List();
+      listUpdated.id = list.id;
+      listUpdated.name = name;
+      this.loading = true;
+      this.listService.update(listUpdated).pipe(first()).subscribe(response => {
+        this.loading = false;
+        list.name = response.name;
+      });
     });
   }
 
@@ -71,10 +82,13 @@ export class ListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       if (result === true) {
-        _this.dataSource.data.splice(index, 1);
-        _this.listTable.renderRows();
+        this.loading = true;
+        this.listService.delete(list).pipe(first()).subscribe(response => {
+          this.loading = false;
+          _this.dataSource.data.splice(index, 1);
+          _this.listTable.renderRows();
+        });
       }
     });
   }

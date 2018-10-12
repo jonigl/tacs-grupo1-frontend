@@ -11,4 +11,16 @@ export class ListService {
     getAll() {
         return this.http.get<RestPage<List>>(`${environment.apiUrl}/lists`);
     }
+
+    create(list: List) {
+        return this.http.post<List>(`${environment.apiUrl}/lists`, list);
+    }
+
+    delete(list: List) {
+        return this.http.delete<List>(`${environment.apiUrl}/lists/${list.id}`);
+    }
+
+    update(list: List) {
+        return this.http.put<List>(`${environment.apiUrl}/lists/${list.id}`, list);
+    }
 }

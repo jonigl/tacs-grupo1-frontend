@@ -41,6 +41,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <mat-toolbar>
+        <mat-spinner [style.display]="loading ? 'block' : 'none'"></mat-spinner>
         <span class="example-spacer"></span>
         <button mat-fab (click)="openNewDialog()" color="primary" matTooltip="Add new list" aria-label="Add new list">
             <mat-icon>add</mat-icon>
