@@ -9,10 +9,16 @@ import { MatDialogRef } from '@angular/material';
 })
 export class NewListDialogComponent {
 
+  name: string;
+
   constructor(public dialogRef: MatDialogRef<NewListDialogComponent>) {}
 
     onNoClick(): void {
       this.dialogRef.close();
+    }
+
+    onEnter() {
+      this.dialogRef.close(this.name);
     }
 
 }

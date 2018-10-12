@@ -20,7 +20,6 @@ export class ListComponent implements OnInit {
   displayedColumns = ['name', 'action'];
   loading = false;
 
-
   constructor(private listService: ListService, public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -48,6 +47,7 @@ export class ListComponent implements OnInit {
         this.loading = true;
         this.listService.create(list).pipe(first()).subscribe(response => {
           this.loading = false;
+          list.id = response.id;
           _this.dataSource.data.push(list);
           _this.listTable.renderRows();
         });

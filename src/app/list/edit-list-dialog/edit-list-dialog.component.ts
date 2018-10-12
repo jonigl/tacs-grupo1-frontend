@@ -8,6 +8,7 @@ import { List } from '../../_models/List';
   styleUrls: ['./edit-list-dialog.component.css']
 })
 export class EditListDialogComponent {
+  newName: string;
 
   constructor(
     public dialogRef: MatDialogRef<EditListDialogComponent>,
@@ -15,5 +16,9 @@ export class EditListDialogComponent {
 
     onNoClick(): void {
       this.dialogRef.close();
+    }
+    
+    onEnter() {
+      this.dialogRef.close(this.newName);
     }
 }
