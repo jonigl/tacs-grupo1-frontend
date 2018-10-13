@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { MatTable, MatSort, MatTableDataSource, MatDialog, _MatSortHeaderMixinBase } from '@angular/material';
-import { List } from '../_models/List';
-import { ListService } from '../_services/list.service';
-import { first } from 'rxjs/operators';
-import { EditListDialogComponent } from './edit-list-dialog/edit-list-dialog.component';
-import { DeleteListDialogComponent } from './delete-list-dialog/delete-list-dialog.component';
-import { NewListDialogComponent } from './new-list-dialog/new-list-dialog.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSort, MatTable, MatTableDataSource } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { first } from 'rxjs/operators';
+import { List, Event } from '../_models';
+import { ListService } from '../_services/list.service';
+import { EditListDialogComponent } from './edit-list-dialog/edit-list-dialog.component';
+import { NewListDialogComponent } from './new-list-dialog/new-list-dialog.component';
+import { DeleteDialogComponent } from '../reusable/delete-dialog/delete-dialog.component';
 
 
 @Component({
@@ -16,30 +16,34 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class ListComponent implements OnInit {
   @ViewChild('listTable') listTable: MatTable<Element>;
+  @ViewChild('eventTable') eventTable: MatTable<Element>;
   @ViewChild(MatSort) sort: MatSort;
   lists: List[];
   events: Event[];
-  dataSource: MatTableDataSource<List>;
+  dataSourceLists: MatTableDataSource<List>;
   dataSourceEvents: MatTableDataSource<Event>
   displayedListColumns = ['name', 'action'];
   displayedEventColumns = ['name', 'start','status', 'action'];
   selectedList: List;
 
-  constructor(private spinner: NgxSpinnerService, private listService: ListService, public dialog: MatDialog) { }
+  constructor(
+    private spinner: NgxSpinnerService, 
+    private listService: ListService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.spinner.show();
     this.listService.getAllLists().pipe(first()).subscribe(page => {
       this.spinner.hide();
       this.lists = page.content;
-      this.dataSource = new MatTableDataSource(this.lists);
-      this.dataSource.sort = this.sort;
+      this.dataSourceLists = new MatTableDataSource(this.lists);
+      this.dataSourceLists.sort = this.sort;
       this.currentList(this.lists[0]);
     });
   }
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSourceLists.filter = filterValue.trim().toLowerCase();
   }
 
   currentList(list) {
@@ -57,7 +61,7 @@ export class ListComponent implements OnInit {
   openNewDialog(): void {
     const _this: ListComponent = this;
     const dialogRef = this.dialog.open(NewListDialogComponent, {
-      width: '250px'
+      width: '350'
     });
 
     dialogRef.afterClosed().subscribe(name => {
@@ -68,7 +72,7 @@ export class ListComponent implements OnInit {
         this.listService.create(list).pipe(first()).subscribe(response => {
           this.spinner.hide();
           list.id = response.id;
-          _this.dataSource.data.push(list);
+          _this.dataSourceLists.data.push(list);
           _this.listTable.renderRows();
         });
       }
@@ -78,7 +82,7 @@ export class ListComponent implements OnInit {
   openEditDialog(index, list): void {
     const _this: ListComponent = this;
     const dialogRef = this.dialog.open(EditListDialogComponent, {
-      width: '250px',
+      width: '350',
       data: { list: list }
     });
 
@@ -96,11 +100,14 @@ export class ListComponent implements OnInit {
     });
   }
 
-  openDeleteDialog(index, list): void {
+  openDeleteListDialog(index, list): void {
     const _this: ListComponent = this;
-    const dialogRef = this.dialog.open(DeleteListDialogComponent, {
-      width: '250px',
-      data: { list: list }
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '350px',
+      data: { 
+        name: list.name,
+        type: 'list'
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -108,8 +115,30 @@ export class ListComponent implements OnInit {
         this.spinner.show();
         this.listService.delete(list).pipe(first()).subscribe(response => {
           this.spinner.hide();
-          _this.dataSource.data.splice(index, 1);
+          _this.dataSourceLists.data.splice(index, 1);
           _this.listTable.renderRows();
+        });
+      }
+    });
+  }
+
+  openDeleteEventDialog(index, event): void {
+    const _this: ListComponent = this;
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '350px',
+      data: { 
+        name: event.name,
+        type: 'event'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.spinner.show();
+        this.listService.deleteEvent(this.selectedList, event).pipe(first()).subscribe(response => {
+          this.spinner.hide();
+          _this.dataSourceEvents.data.splice(index, 1);
+          _this.eventTable.renderRows();
         });
       }
     });

@@ -19,7 +19,7 @@ import { NgxMasonryModule } from 'ngx-masonry';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';
-import { DeleteListDialogComponent } from './list/delete-list-dialog/delete-list-dialog.component';
+import { DeleteDialogComponent } from './reusable/delete-dialog/delete-dialog.component';
 import { NewListDialogComponent } from './list/new-list-dialog/new-list-dialog.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -55,12 +55,12 @@ import { NgxSpinnerModule } from 'ngx-spinner';
         SearchComponent,
         ListComponent,
         EditListDialogComponent,
-        DeleteListDialogComponent,
+        DeleteDialogComponent,
         NewListDialogComponent
     ],
     entryComponents: [
         EditListDialogComponent,
-        DeleteListDialogComponent,
+        DeleteDialogComponent,
         NewListDialogComponent
     ],
     providers: [

@@ -2,7 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-import { RestPage, List } from '../_models';
+import { RestPage, List, Event } from '../_models';
 
 @Injectable({ providedIn: 'root' })
 export class ListService {
@@ -26,6 +26,10 @@ export class ListService {
 
     update(list: List) {
         return this.http.put<List>(`${environment.apiUrl}/lists/${list.id}`, list);
+    }
+
+    deleteEvent(list: List, event: Event) {
+        return this.http.delete<Event>(`${environment.apiUrl}/lists/${list.id}/events/${event.id}`);
     }
 
 }
