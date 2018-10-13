@@ -5,6 +5,8 @@ import { User, UserRequest } from 'src/app/_models';
 import { first } from 'rxjs/internal/operators/first';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { TelegramWidgetComponent } from 'src/app/telegram-widget/telegram-widget.component';
+import { MatSnackBar } from '@angular/material';
+import { AccountSavedSnackBarComponent } from './account-saved-snack-bar/account-saved-snack-bar.component';
 
 @Component({
     selector: 'app-account',
@@ -39,6 +41,7 @@ export class AccountComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
+        private snackBar: MatSnackBar,
         private userService: UserService) { }
 
     ngOnInit() {
@@ -94,6 +97,9 @@ export class AccountComponent implements OnInit {
                 .subscribe(user => {
                     this.user = user;
                     this.initValues();
+                    this.snackBar.openFromComponent(AccountSavedSnackBarComponent, {
+                        duration: 1000,
+                      });
                 });
         }
     }
