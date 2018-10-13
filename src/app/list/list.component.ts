@@ -7,6 +7,7 @@ import { ListService } from '../_services/list.service';
 import { EditListDialogComponent } from './edit-list-dialog/edit-list-dialog.component';
 import { NewListDialogComponent } from './new-list-dialog/new-list-dialog.component';
 import { DeleteDialogComponent } from '../reusable/delete-dialog/delete-dialog.component';
+import { EventDialogComponent } from './event-dialog/event-dialog.component';
 
 
 @Component({
@@ -63,7 +64,6 @@ export class ListComponent implements OnInit {
     const dialogRef = this.dialog.open(NewListDialogComponent, {
       width: '350'
     });
-
     dialogRef.afterClosed().subscribe(name => {
       if (name) {
         const list: List = new List();
@@ -85,7 +85,6 @@ export class ListComponent implements OnInit {
       width: '350',
       data: { list: list }
     });
-
     dialogRef.afterClosed().subscribe(name => {
       if (name) {
         const listUpdated: List = new List();
@@ -109,7 +108,6 @@ export class ListComponent implements OnInit {
         type: 'list'
       }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
         this.spinner.show();
@@ -131,7 +129,6 @@ export class ListComponent implements OnInit {
         type: 'event'
       }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
         this.spinner.show();
@@ -141,6 +138,13 @@ export class ListComponent implements OnInit {
           _this.eventTable.renderRows();
         });
       }
+    });
+  }
+
+  openEventDialog(index, event): void {
+    const dialogRef = this.dialog.open(EventDialogComponent, {
+      width: '500px',
+      data: { event: event }
     });
   }
 

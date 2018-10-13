@@ -21,7 +21,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';
 import { DeleteDialogComponent } from './reusable/delete-dialog/delete-dialog.component';
 import { NewListDialogComponent } from './list/new-list-dialog/new-list-dialog.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerModule } from 'ngx-spinner';;
+import { EventDialogComponent } from './list/event-dialog/event-dialog.component'
 
 @NgModule({
     imports: [
@@ -56,12 +57,14 @@ import { NgxSpinnerModule } from 'ngx-spinner';
         ListComponent,
         EditListDialogComponent,
         DeleteDialogComponent,
-        NewListDialogComponent
+        NewListDialogComponent,
+        EventDialogComponent
     ],
     entryComponents: [
         EditListDialogComponent,
         DeleteDialogComponent,
-        NewListDialogComponent
+        NewListDialogComponent,
+        EventDialogComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
