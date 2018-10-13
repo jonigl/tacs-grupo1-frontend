@@ -2,3 +2,4 @@
 export * from './List';
 export * from './User';
 export * from './Event';
+export * from './EventId';

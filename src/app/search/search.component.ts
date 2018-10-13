@@ -4,6 +4,10 @@ import { EventFilter } from 'src/app/_models/EventFilter';
 import { Event } from 'src/app/_models/Event';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SearchElementDialogComponent } from '../reusable/search-element-dialog/search-element-dialog.component';
+import { MatDialog } from '@angular/material';
+import { ListService } from '../_services';
+import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'app-search',
@@ -21,6 +25,8 @@ export class SearchComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private spinner: NgxSpinnerService,
+        public dialog: MatDialog,
+        private listService: ListService,
         private eventService: EventService) { }
 
     ngOnInit() {
@@ -43,11 +49,28 @@ export class SearchComponent implements OnInit {
     onChange() {
         if (this.getControls().keywordControl.value !== '') {
             this.spinner.show();
-            let filter = this.getFilter();
+            const filter = this.getFilter();
             this.eventService.search(filter).subscribe(page => {
                 this.spinner.hide();
                 this.events = page.content;
             });
         }
+    }
+
+    openAddEventDialog(event): void {
+    const dialogRef = this.dialog.open(SearchElementDialogComponent, {
+      width: '500px',
+      data: {
+        event: event
+      }
+    });
+    dialogRef.afterClosed().subscribe(list => {
+      if (list) {
+        this.spinner.show();
+        this.listService.addEvent(list, event).pipe(first()).subscribe(response => {
+          this.spinner.hide();
+        });
+      }
+    });
     }
 }

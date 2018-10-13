@@ -22,13 +22,13 @@ export class ListComponent implements OnInit {
   lists: List[];
   events: Event[];
   dataSourceLists: MatTableDataSource<List>;
-  dataSourceEvents: MatTableDataSource<Event>
+  dataSourceEvents: MatTableDataSource<Event>;
   displayedListColumns = ['name', 'action'];
-  displayedEventColumns = ['name', 'start','status', 'action'];
+  displayedEventColumns = ['name', 'start', 'status', 'action'];
   selectedList: List;
 
   constructor(
-    private spinner: NgxSpinnerService, 
+    private spinner: NgxSpinnerService,
     private listService: ListService,
     public dialog: MatDialog) { }
 
@@ -43,8 +43,12 @@ export class ListComponent implements OnInit {
     });
   }
 
-  applyFilter(filterValue: string) {
+  applyFilterList(filterValue: string) {
     this.dataSourceLists.filter = filterValue.trim().toLowerCase();
+  }
+
+  applyFilterEvents(filterValue: string) {
+    this.dataSourceEvents.filter = filterValue.trim().toLowerCase();
   }
 
   currentList(list) {
@@ -56,7 +60,7 @@ export class ListComponent implements OnInit {
       this.events = page.content;
       this.dataSourceEvents = new MatTableDataSource(this.events);
       this.dataSourceEvents.sort = this.sort;
-    })
+    });
   }
 
   openNewDialog(): void {
@@ -103,7 +107,7 @@ export class ListComponent implements OnInit {
     const _this: ListComponent = this;
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '350px',
-      data: { 
+      data: {
         name: list.name,
         type: 'list'
       }
@@ -124,7 +128,7 @@ export class ListComponent implements OnInit {
     const _this: ListComponent = this;
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '350px',
-      data: { 
+      data: {
         name: event.name,
         type: 'event'
       }

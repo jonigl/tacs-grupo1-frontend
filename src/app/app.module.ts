@@ -12,7 +12,22 @@ import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { SearchComponent } from './search/search.component';
 import { ListComponent } from './list/list.component';
-import { MatTooltipModule, MatDialogModule, MatMenuModule, MatListModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule, MatProgressSpinnerModule } from '@angular/material';
+import {
+    MatSelectModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatListModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatTableModule,
+    MatProgressSpinnerModule
+} from '@angular/material';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -22,6 +37,7 @@ import { NewListDialogComponent } from './list/new-list-dialog/new-list-dialog.c
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { EventDialogComponent } from './list/event-dialog/event-dialog.component';
 import { SearchElementDialogComponent } from './reusable/search-element-dialog/search-element-dialog.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
     imports: [
@@ -46,7 +62,9 @@ import { SearchElementDialogComponent } from './reusable/search-element-dialog/s
         FlexLayoutModule,
         MatDialogModule,
         MatTooltipModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
+        MatSelectModule,
+        NgxMatSelectSearchModule
     ],
     declarations: [
         AppComponent,
@@ -58,13 +76,14 @@ import { SearchElementDialogComponent } from './reusable/search-element-dialog/s
         DeleteDialogComponent,
         NewListDialogComponent,
         EventDialogComponent,
-        SearchElementDialogComponent    
+        SearchElementDialogComponent
     ],
     entryComponents: [
         EditListDialogComponent,
         DeleteDialogComponent,
         NewListDialogComponent,
-        EventDialogComponent
+        EventDialogComponent,
+        SearchElementDialogComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

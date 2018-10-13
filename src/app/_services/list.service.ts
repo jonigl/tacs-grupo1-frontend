@@ -2,7 +2,8 @@
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-import { RestPage, List, Event } from '../_models';
+import { RestPage, List, Event, EventId } from '../_models';
+import { EventDialogComponent } from '../list/event-dialog/event-dialog.component';
 
 @Injectable({ providedIn: 'root' })
 export class ListService {
@@ -33,7 +34,8 @@ export class ListService {
     }
 
     addEvent(list: List, event: Event) {
-        return this.http.post<Event>(`${environment.apiUrl}/lists/${list.id}/events/`, event);
+        const eventId: EventId = { id : event.id };
+        return this.http.post<Event>(`${environment.apiUrl}/lists/${list.id}/events/`, eventId);
     }
 
 }

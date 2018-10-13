@@ -13,7 +13,7 @@
             </mat-card-title>
         </mat-card-header>
         <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter lists">
+            <input matInput (keyup)="applyFilterList($event.target.value)" placeholder="Filter lists">
         </mat-form-field>
 
         <mat-card-content>
@@ -68,7 +68,7 @@
             </mat-card-title>
         </mat-card-header>
         <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter events">
+            <input matInput (keyup)="applyFilterEvents($event.target.value)" placeholder="Filter events">
         </mat-form-field>
         <mat-card-content>
             <table mat-table fxFlex="100" #eventTable [dataSource]="dataSourceEvents" matSort>
