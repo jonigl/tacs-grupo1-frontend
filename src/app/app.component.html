@@ -2,13 +2,15 @@
     
     <mat-toolbar color="primary" class="example-toolbar">
 
-        <button mat-icon-button (click)="snav.toggle()">
+        <button mat-icon-button (click)="snav.toggle()" *ngIf="isLoggedIn()">
             <mat-icon>menu</mat-icon>
         </button>
 
         <h1 class="example-app-name">Event App</h1>
+        
         <span class="example-spacer"></span>
-        <button mat-button [matMenuTriggerFor]="menu"><span>Session</span><mat-icon class="example-icon">account_box</mat-icon></button>
+
+        <button mat-button [matMenuTriggerFor]="menu" *ngIf="isLoggedIn()"><span>Session</span><mat-icon class="example-icon">account_box</mat-icon></button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item>Profile</button>
           <button mat-menu-item [routerLink]="['/login']" >Logout</button>
@@ -16,9 +18,9 @@
 
     </mat-toolbar>
 
-    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0" >
 
-        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+        <mat-sidenav class="sidenav-menu" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
             fixedTopGap="56">
             <mat-nav-list>
                 <!-- User -->
