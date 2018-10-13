@@ -32,4 +32,8 @@ export class ListService {
         return this.http.delete<Event>(`${environment.apiUrl}/lists/${list.id}/events/${event.id}`);
     }
 
+    addEvent(list: List, event: Event) {
+        return this.http.post<Event>(`${environment.apiUrl}/lists/${list.id}/events/`, event);
+    }
+
 }

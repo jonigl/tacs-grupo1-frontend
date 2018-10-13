@@ -4,11 +4,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // used to create fake backend
-import { fakeBackendProvider } from './_helpers';
-
+// import { fakeBackendProvider } from './_helpers';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
-
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
@@ -21,8 +19,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';
 import { DeleteDialogComponent } from './reusable/delete-dialog/delete-dialog.component';
 import { NewListDialogComponent } from './list/new-list-dialog/new-list-dialog.component';
-import { NgxSpinnerModule } from 'ngx-spinner';;
-import { EventDialogComponent } from './list/event-dialog/event-dialog.component'
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { EventDialogComponent } from './list/event-dialog/event-dialog.component';
+import { SearchElementDialogComponent } from './reusable/search-element-dialog/search-element-dialog.component';
 
 @NgModule({
     imports: [
@@ -58,7 +57,8 @@ import { EventDialogComponent } from './list/event-dialog/event-dialog.component
         EditListDialogComponent,
         DeleteDialogComponent,
         NewListDialogComponent,
-        EventDialogComponent
+        EventDialogComponent,
+        SearchElementDialogComponent    
     ],
     entryComponents: [
         EditListDialogComponent,

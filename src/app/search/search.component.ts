@@ -3,6 +3,7 @@ import { EventService } from 'src/app/_services/event.service';
 import { EventFilter } from 'src/app/_models/EventFilter';
 import { Event } from 'src/app/_models/Event';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-search',
@@ -19,6 +20,7 @@ export class SearchComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
+        private spinner: NgxSpinnerService,
         private eventService: EventService) { }
 
     ngOnInit() {
@@ -40,11 +42,10 @@ export class SearchComponent implements OnInit {
 
     onChange() {
         if (this.getControls().keywordControl.value !== '') {
-            this.loading = true;
-
+            this.spinner.show();
             let filter = this.getFilter();
             this.eventService.search(filter).subscribe(page => {
-                this.loading = false;
+                this.spinner.hide();
                 this.events = page.content;
             });
         }

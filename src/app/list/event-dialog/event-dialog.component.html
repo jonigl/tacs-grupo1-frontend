@@ -4,7 +4,7 @@
   <p>{{ data.event.description }}</p>
 
   <h4>Link to the event</h4>
-  <a [attr.href]="'//' + data.event.url" target="_blank" [title]="data.event.name">link</a>
+  <a [attr.href]="data.event.url" target="_blank" [title]="data.event.name">link</a>
 
   <h4>Start date</h4>
   <p>{{ data.event.start }}</p>
