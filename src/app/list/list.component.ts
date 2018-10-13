@@ -1,11 +1,14 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { MatTable, MatSort, MatTableDataSource, MatDialog, _MatSortHeaderMixinBase } from '@angular/material';
-import { List } from '../_models/List';
-import { ListService } from '../_services/list.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSort, MatTable, MatTableDataSource } from '@angular/material';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { first } from 'rxjs/operators';
+import { List, Event } from '../_models';
+import { ListService } from '../_services/list.service';
 import { EditListDialogComponent } from './edit-list-dialog/edit-list-dialog.component';
-import { DeleteListDialogComponent } from './delete-list-dialog/delete-list-dialog.component';
 import { NewListDialogComponent } from './new-list-dialog/new-list-dialog.component';
+import { DeleteDialogComponent } from '../reusable/delete-dialog/delete-dialog.component';
+import { EventDialogComponent } from './event-dialog/event-dialog.component';
+
 
 @Component({
   selector: 'app-list',
@@ -14,41 +17,66 @@ import { NewListDialogComponent } from './new-list-dialog/new-list-dialog.compon
 })
 export class ListComponent implements OnInit {
   @ViewChild('listTable') listTable: MatTable<Element>;
+  @ViewChild('eventTable') eventTable: MatTable<Element>;
   @ViewChild(MatSort) sort: MatSort;
   lists: List[];
-  dataSource: MatTableDataSource<List>;
-  displayedColumns = ['name', 'action'];
-  loading = false;
+  events: Event[];
+  dataSourceLists: MatTableDataSource<List>;
+  dataSourceEvents: MatTableDataSource<Event>;
+  displayedListColumns = ['name', 'action'];
+  displayedEventColumns = ['name', 'start', 'status', 'action'];
+  selectedList: List;
 
-  constructor(private listService: ListService, public dialog: MatDialog) { }
+  constructor(
+    private spinner: NgxSpinnerService,
+    private listService: ListService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.listService.getAll().pipe(first()).subscribe(page => {
+    this.spinner.show();
+    this.listService.getAllLists().pipe(first()).subscribe(page => {
+      this.spinner.hide();
       this.lists = page.content;
-      this.dataSource = new MatTableDataSource(this.lists);
-      this.dataSource.sort = this.sort;
+      this.dataSourceLists = new MatTableDataSource(this.lists);
+      this.dataSourceLists.sort = this.sort;
+      this.currentList(this.lists[0]);
     });
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilterList(filterValue: string) {
+    this.dataSourceLists.filter = filterValue.trim().toLowerCase();
+  }
+
+  applyFilterEvents(filterValue: string) {
+    this.dataSourceEvents.filter = filterValue.trim().toLowerCase();
+  }
+
+  currentList(list) {
+    this.selectedList = list;
+    console.log(list);
+    this.spinner.show();
+    this.listService.getAllEvents(list).pipe(first()).subscribe(page => {
+      this.spinner.hide();
+      this.events = page.content;
+      this.dataSourceEvents = new MatTableDataSource(this.events);
+      this.dataSourceEvents.sort = this.sort;
+    });
   }
 
   openNewDialog(): void {
     const _this: ListComponent = this;
     const dialogRef = this.dialog.open(NewListDialogComponent, {
-      width: '250px'
+      width: '350'
     });
-
     dialogRef.afterClosed().subscribe(name => {
       if (name) {
         const list: List = new List();
         list.name = name;
-        this.loading = true;
+        this.spinner.show();
         this.listService.create(list).pipe(first()).subscribe(response => {
-          this.loading = false;
+          this.spinner.hide();
           list.id = response.id;
-          _this.dataSource.data.push(list);
+          _this.dataSourceLists.data.push(list);
           _this.listTable.renderRows();
         });
       }
@@ -58,38 +86,69 @@ export class ListComponent implements OnInit {
   openEditDialog(index, list): void {
     const _this: ListComponent = this;
     const dialogRef = this.dialog.open(EditListDialogComponent, {
-      width: '250px',
+      width: '350',
       data: { list: list }
     });
-
     dialogRef.afterClosed().subscribe(name => {
-      const listUpdated: List = new List();
-      listUpdated.id = list.id;
-      listUpdated.name = name;
-      this.loading = true;
-      this.listService.update(listUpdated).pipe(first()).subscribe(response => {
-        this.loading = false;
-        list.name = response.name;
-      });
+      if (name) {
+        const listUpdated: List = new List();
+        listUpdated.id = list.id;
+        listUpdated.name = name;
+        this.spinner.show();
+        this.listService.update(listUpdated).pipe(first()).subscribe(response => {
+          this.spinner.hide();
+          list.name = response.name;
+        });
+      }
     });
   }
 
-  openDeleteDialog(index, list): void {
+  openDeleteListDialog(index, list): void {
     const _this: ListComponent = this;
-    const dialogRef = this.dialog.open(DeleteListDialogComponent, {
-      width: '250px',
-      data: { list: list }
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '350px',
+      data: {
+        name: list.name,
+        type: 'list'
+      }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.loading = true;
+        this.spinner.show();
         this.listService.delete(list).pipe(first()).subscribe(response => {
-          this.loading = false;
-          _this.dataSource.data.splice(index, 1);
+          this.spinner.hide();
+          _this.dataSourceLists.data.splice(index, 1);
           _this.listTable.renderRows();
         });
       }
+    });
+  }
+
+  openDeleteEventDialog(index, event): void {
+    const _this: ListComponent = this;
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '350px',
+      data: {
+        name: event.name,
+        type: 'event'
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.spinner.show();
+        this.listService.deleteEvent(this.selectedList, event).pipe(first()).subscribe(response => {
+          this.spinner.hide();
+          _this.dataSourceEvents.data.splice(index, 1);
+          _this.eventTable.renderRows();
+        });
+      }
+    });
+  }
+
+  openEventDialog(index, event): void {
+    const dialogRef = this.dialog.open(EventDialogComponent, {
+      width: '500px',
+      data: { event: event }
     });
   }
 

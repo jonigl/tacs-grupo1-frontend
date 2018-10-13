@@ -4,23 +4,40 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // used to create fake backend
-import { fakeBackendProvider } from './_helpers';
-
+// import { fakeBackendProvider } from './_helpers';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
-
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { SearchComponent } from './search/search.component';
 import { ListComponent } from './list/list.component';
-import { MatTooltipModule, MatDialogModule, MatMenuModule, MatListModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule, MatProgressSpinnerModule } from '@angular/material';
+import {
+    MatSelectModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatListModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatTableModule,
+    MatProgressSpinnerModule
+} from '@angular/material';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';
-import { DeleteListDialogComponent } from './list/delete-list-dialog/delete-list-dialog.component';
+import { DeleteDialogComponent } from './reusable/delete-dialog/delete-dialog.component';
 import { NewListDialogComponent } from './list/new-list-dialog/new-list-dialog.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { EventDialogComponent } from './list/event-dialog/event-dialog.component';
+import { SearchElementDialogComponent } from './reusable/search-element-dialog/search-element-dialog.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
     imports: [
@@ -44,7 +61,10 @@ import { NewListDialogComponent } from './list/new-list-dialog/new-list-dialog.c
         MatMenuModule,
         FlexLayoutModule,
         MatDialogModule,
-        MatTooltipModule
+        MatTooltipModule,
+        NgxSpinnerModule,
+        MatSelectModule,
+        NgxMatSelectSearchModule
     ],
     declarations: [
         AppComponent,
@@ -53,13 +73,17 @@ import { NewListDialogComponent } from './list/new-list-dialog/new-list-dialog.c
         SearchComponent,
         ListComponent,
         EditListDialogComponent,
-        DeleteListDialogComponent,
-        NewListDialogComponent
+        DeleteDialogComponent,
+        NewListDialogComponent,
+        EventDialogComponent,
+        SearchElementDialogComponent
     ],
     entryComponents: [
         EditListDialogComponent,
-        DeleteListDialogComponent,
-        NewListDialogComponent
+        DeleteDialogComponent,
+        NewListDialogComponent,
+        EventDialogComponent,
+        SearchElementDialogComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
