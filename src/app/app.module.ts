@@ -1,4 +1,4 @@
-﻿import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -12,6 +12,10 @@ import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { SearchComponent } from './search/search.component';
 import { ListComponent } from './list/list.component';
+import { NgxMasonryModule } from 'ngx-masonry';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AccountComponent } from './account/account.component';
+import { TelegramWidgetComponent } from './telegram-widget/telegram-widget.component';
 import {
     MatSelectModule,
     MatTooltipModule,
@@ -72,6 +76,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
         LoginComponent,
         SearchComponent,
         ListComponent,
+        AccountComponent,
+        TelegramWidgetComponent
         EditListDialogComponent,
         DeleteDialogComponent,
         NewListDialogComponent,

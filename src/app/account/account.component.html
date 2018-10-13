@@ -1,0 +1,38 @@
+<mat-toolbar>
+    <span>Manage account</span>
+</mat-toolbar>
+
+<mat-card class="user-info-card">
+    <form class="basic-info-form" [formGroup]="basicInfoForm" (ngSubmit)="onSubmit()">
+
+        <h3>Basic information</h3>
+
+        <mat-form-field class="full-width">
+            <input matInput class="username-input" formControlName="usernameControl" placeholder="Username">
+            <mat-error *ngIf="usernameControl.invalid">Username must have 4 to 50 characters.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput class="password-input" formControlName="passwordControl" type="password" placeholder="password">
+            <mat-error *ngIf="passwordControl.invalid">Password is too long.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput class="firstname-input" formControlName="firstnameControl" placeholder="First name">
+            <mat-error *ngIf="firstnameControl.invalid">First name must have 4 to 50 characters.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput class="lastname-input" formControlName="lastnameControl" placeholder="Last name">
+            <mat-error *ngIf="lastnameControl.invalid">Last name must have 4 to 50 characters.</mat-error>
+        </mat-form-field>
+
+        <h3>Integrate with Telegram</h3>
+        <app-telegram-widget></app-telegram-widget>
+
+        <p>
+            <button mat-raised-button color="primary" type="submit" [disabled]="basicInfoForm.invalid">Save</button>
+        </p>
+
+    </form>
+</mat-card>

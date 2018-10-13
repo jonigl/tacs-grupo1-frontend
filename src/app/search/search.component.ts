@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/_services/event.service';
-import { EventFilter } from 'src/app/_models/EventFilter';
+import { EventFilter } from 'src/app/_models';
 import { Event } from 'src/app/_models/Event';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -17,7 +17,6 @@ import { first } from 'rxjs/operators';
 export class SearchComponent implements OnInit {
 
     searchForm: FormGroup;
-    searchFormControl = new FormControl('');
 
     loading: boolean;
     events: Event[];

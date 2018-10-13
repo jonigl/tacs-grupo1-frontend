@@ -1,9 +1,8 @@
-export class User {
-    id: number;
+export class UserRequest {
+
     username: string;
+    password: string;
     firstname: string;
     lastname: string;
-    lastAccess: Date;
     telegramUserId: number | null;
-    password: string;
 }
