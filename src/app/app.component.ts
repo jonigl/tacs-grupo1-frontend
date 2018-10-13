@@ -5,7 +5,8 @@ import { AuthenticationService } from './_services';
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
-    styleUrls: ['app.component.css']
+    styleUrls: ['app.component.css'],
+    providers: [AuthenticationService]
 })
 
 export class AppComponent implements OnDestroy {
@@ -13,7 +14,7 @@ export class AppComponent implements OnDestroy {
     private _mobileQueryListener: () => void;
 
     constructor(
-        private authenticationService: AuthenticationService,
+        public authenticationService: AuthenticationService,
         changeDetectorRef: ChangeDetectorRef,
         media: MediaMatcher
     ) {
@@ -29,5 +30,15 @@ export class AppComponent implements OnDestroy {
     isLoggedIn() {
         return this.authenticationService.isLoggedIn();
     }
+
+    isUser() {
+        return this.authenticationService.isUser();
+    }
+
+    isAdmin() {
+        return this.authenticationService.isAdmin();
+    }
+
+
 
 }
