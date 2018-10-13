@@ -6,6 +6,8 @@ import { first } from 'rxjs/operators';
 import { EditListDialogComponent } from './edit-list-dialog/edit-list-dialog.component';
 import { DeleteListDialogComponent } from './delete-list-dialog/delete-list-dialog.component';
 import { NewListDialogComponent } from './new-list-dialog/new-list-dialog.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-list',
@@ -16,17 +18,23 @@ export class ListComponent implements OnInit {
   @ViewChild('listTable') listTable: MatTable<Element>;
   @ViewChild(MatSort) sort: MatSort;
   lists: List[];
+  events: Event[];
   dataSource: MatTableDataSource<List>;
-  displayedColumns = ['name', 'action'];
-  loading = false;
+  dataSourceEvents: MatTableDataSource<Event>
+  displayedListColumns = ['name', 'action'];
+  displayedEventColumns = ['name', 'start','status', 'action'];
+  selectedList: List;
 
-  constructor(private listService: ListService, public dialog: MatDialog) { }
+  constructor(private spinner: NgxSpinnerService, private listService: ListService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.listService.getAll().pipe(first()).subscribe(page => {
+    this.spinner.show();
+    this.listService.getAllLists().pipe(first()).subscribe(page => {
+      this.spinner.hide();
       this.lists = page.content;
       this.dataSource = new MatTableDataSource(this.lists);
       this.dataSource.sort = this.sort;
+      this.currentList(this.lists[0]);
     });
   }
 
@@ -34,8 +42,16 @@ export class ListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  getEvents(list) {
+  currentList(list) {
+    this.selectedList = list;
     console.log(list);
+    this.spinner.show();
+    this.listService.getAllEvents(list).pipe(first()).subscribe(page => {
+      this.spinner.hide();
+      this.events = page.content;
+      this.dataSourceEvents = new MatTableDataSource(this.events);
+      this.dataSourceEvents.sort = this.sort;
+    })
   }
 
   openNewDialog(): void {
@@ -48,9 +64,9 @@ export class ListComponent implements OnInit {
       if (name) {
         const list: List = new List();
         list.name = name;
-        this.loading = true;
+        this.spinner.show();
         this.listService.create(list).pipe(first()).subscribe(response => {
-          this.loading = false;
+          this.spinner.hide();
           list.id = response.id;
           _this.dataSource.data.push(list);
           _this.listTable.renderRows();
@@ -71,9 +87,9 @@ export class ListComponent implements OnInit {
         const listUpdated: List = new List();
         listUpdated.id = list.id;
         listUpdated.name = name;
-        this.loading = true;
+        this.spinner.show();
         this.listService.update(listUpdated).pipe(first()).subscribe(response => {
-          this.loading = false;
+          this.spinner.hide();
           list.name = response.name;
         });
       }
@@ -89,9 +105,9 @@ export class ListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.loading = true;
+        this.spinner.show();
         this.listService.delete(list).pipe(first()).subscribe(response => {
-          this.loading = false;
+          this.spinner.hide();
           _this.dataSource.data.splice(index, 1);
           _this.listTable.renderRows();
         });

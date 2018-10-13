@@ -8,8 +8,12 @@ import { RestPage, List } from '../_models';
 export class ListService {
     constructor(private http: HttpClient) { }
 
-    getAll() {
+    getAllLists() {
         return this.http.get<RestPage<List>>(`${environment.apiUrl}/lists`);
+    }
+
+    getAllEvents(list: List) {
+        return this.http.get<RestPage<Event>>(`${environment.apiUrl}/lists/${list.id}/events`);
     }
 
     create(list: List) {
@@ -23,4 +27,5 @@ export class ListService {
     update(list: List) {
         return this.http.put<List>(`${environment.apiUrl}/lists/${list.id}`, list);
     }
+
 }

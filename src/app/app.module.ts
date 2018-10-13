@@ -21,6 +21,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';
 import { DeleteListDialogComponent } from './list/delete-list-dialog/delete-list-dialog.component';
 import { NewListDialogComponent } from './list/new-list-dialog/new-list-dialog.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
     imports: [
@@ -44,7 +45,8 @@ import { NewListDialogComponent } from './list/new-list-dialog/new-list-dialog.c
         MatMenuModule,
         FlexLayoutModule,
         MatDialogModule,
-        MatTooltipModule
+        MatTooltipModule,
+        NgxSpinnerModule
     ],
     declarations: [
         AppComponent,
