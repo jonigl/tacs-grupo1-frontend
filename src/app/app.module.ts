@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
 // used to create fake backend
 // import { fakeBackendProvider } from './_helpers';
 import { AppComponent } from './app.component';
@@ -32,8 +31,6 @@ import {
     MatTableModule,
     MatProgressSpinnerModule
 } from '@angular/material';
-import { NgxMasonryModule } from 'ngx-masonry';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';
 import { DeleteDialogComponent } from './reusable/delete-dialog/delete-dialog.component';
@@ -77,7 +74,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
         SearchComponent,
         ListComponent,
         AccountComponent,
-        TelegramWidgetComponent
+        TelegramWidgetComponent,
         EditListDialogComponent,
         DeleteDialogComponent,
         NewListDialogComponent,
