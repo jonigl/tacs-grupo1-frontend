@@ -7,7 +7,6 @@ enum Status {
 }
 
 export class Event {
-
     id: string;
     name: string;
     description: string;

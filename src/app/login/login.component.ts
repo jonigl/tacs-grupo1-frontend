@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../_services';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({templateUrl: 'login.component.html'})
 export class LoginComponent implements OnInit {
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
+        private spinner: NgxSpinnerService,
         private authenticationService: AuthenticationService) {}
 
     ngOnInit() {
@@ -43,12 +45,13 @@ export class LoginComponent implements OnInit {
             return;
         }
 
-        this.loading = true;
+        this.spinner.show();
         this.authenticationService.login(this.f.username.value, this.f.password.value)
             .pipe(first())
             .subscribe(
                 data => {
                     this.router.navigate([this.returnUrl]);
+                    this.spinner.hide();
                 },
                 error => {
                     this.error = error;

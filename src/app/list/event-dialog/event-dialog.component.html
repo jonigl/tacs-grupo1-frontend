@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>{{ data.event.name }}</h2>
+<mat-dialog-content>
+  <h4>Description</h4>
+  <p>{{ data.event.description }}</p>
+
+  <h4>Link to the event</h4>
+  <a [attr.href]="data.event.url" target="_blank" [title]="data.event.name">link</a>
+
+  <h4>Start date</h4>
+  <p>{{ data.event.start }}</p>
+
+  <h4>End date</h4>
+  <p>{{ data.event.end }}</p>
+
+  <h4>Created date</h4>
+  <p>{{ data.event.created }}</p>
+
+  <h4>Changed date</h4>
+  <p>{{ data.event.changed }}</p>
+
+  <h4>Status</h4>
+  <p>{{ data.event.status }}</p>
+
+  <h4>Currency</h4>
+  <p>{{ data.event.currency }}</p>
+
+  <h4>Online event</h4>
+  <p>{{ data.event.online_event }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

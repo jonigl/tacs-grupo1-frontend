@@ -1,14 +1,12 @@
-﻿import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // used to create fake backend
-import { fakeBackendProvider } from './_helpers';
-
+// import { fakeBackendProvider } from './_helpers';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
-
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
@@ -18,11 +16,32 @@ import { NgxMasonryModule } from 'ngx-masonry';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccountComponent } from './account/account.component';
 import { TelegramWidgetComponent } from './telegram-widget/telegram-widget.component';
-
 import {
-    MatListModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatButtonModule,
-    MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule, MatProgressSpinnerModule
+    MatSelectModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatListModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatTableModule,
+    MatProgressSpinnerModule
 } from '@angular/material';
+import { NgxMasonryModule } from 'ngx-masonry';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';
+import { DeleteDialogComponent } from './reusable/delete-dialog/delete-dialog.component';
+import { NewListDialogComponent } from './list/new-list-dialog/new-list-dialog.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { EventDialogComponent } from './list/event-dialog/event-dialog.component';
+import { SearchElementDialogComponent } from './reusable/search-element-dialog/search-element-dialog.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
     imports: [
@@ -42,7 +61,14 @@ import {
         MatSidenavModule,
         MatListModule,
         FormsModule,
-        NgxMasonryModule
+        NgxMasonryModule,
+        MatMenuModule,
+        FlexLayoutModule,
+        MatDialogModule,
+        MatTooltipModule,
+        NgxSpinnerModule,
+        MatSelectModule,
+        NgxMatSelectSearchModule
     ],
     declarations: [
         AppComponent,
@@ -52,6 +78,18 @@ import {
         ListComponent,
         AccountComponent,
         TelegramWidgetComponent
+        EditListDialogComponent,
+        DeleteDialogComponent,
+        NewListDialogComponent,
+        EventDialogComponent,
+        SearchElementDialogComponent
+    ],
+    entryComponents: [
+        EditListDialogComponent,
+        DeleteDialogComponent,
+        NewListDialogComponent,
+        EventDialogComponent,
+        SearchElementDialogComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
