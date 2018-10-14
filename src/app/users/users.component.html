@@ -11,7 +11,7 @@
   <mat-card-content fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
 
     <mat-form-field>
-      <input matInput (keyup)="applyFilterList($event.target.value)" placeholder="Filter users">
+      <input matInput (keyup)="applyFilterUser($event.target.value)" placeholder="Filter users">
     </mat-form-field>
 
     <table mat-table fxFlex="100" #userTable [dataSource]="dataSourceUsers" matSort>

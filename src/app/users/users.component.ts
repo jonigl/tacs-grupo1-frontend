@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
   users: User[];
   events: Event[];
   dataSourceUsers: MatTableDataSource<User>;
-  displayedUserColumns = ['username', 'firstname', 'lastname', 'email', 'firstname', 'lastAccess', 'telegramUserId', 'action'];
+  displayedUserColumns = ['username', 'firstname', 'lastname', 'email', 'lastAccess', 'telegramUserId', 'action'];
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -36,6 +36,10 @@ export class UsersComponent implements OnInit {
         this.snackbar.open('No users found', '', { duration: 3000 });
       }
     });
+  }
+
+  applyFilterUser(filterValue: string) {
+    this.dataSourceUsers.filter = filterValue.trim().toLowerCase();
   }
 
 }
