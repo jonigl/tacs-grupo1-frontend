@@ -42,4 +42,17 @@ export class UsersComponent implements OnInit {
     this.dataSourceUsers.filter = filterValue.trim().toLowerCase();
   }
 
+  showTotaLists(user: User) {
+    this.userService.getTotalLists(user).pipe(first()).subscribe(response => {
+      console.log(response);
+      this.snackbar.open(`Total lists: ${response.totalLists}`, '', { duration: 3000 });
+    });
+  }
+
+  showTotalAlarms(user: User) {
+    this.userService.getTotalAlarms(user).pipe(first()).subscribe(response => {
+      this.snackbar.open(`Total alarms: ${response.totalAlarms}`, '', { duration: 3000 });
+    });
+  }
+
 }

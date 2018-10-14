@@ -27,4 +27,12 @@ export class UserService {
     getAllUsers() {
         return this.http.get<RestPage<User>>(`${environment.apiUrl}/users`);
     }
+
+    getTotalAlarms(user: User) {
+        return this.http.get<any>(`${environment.apiUrl}/users/${user.id}/total_alarms`);
+    }
+
+    getTotalLists(user: User) {
+        return this.http.get<any>(`${environment.apiUrl}/users/${user.id}/total_lists`);
+    }
 }

@@ -60,14 +60,15 @@
           <button mat-button [matMenuTriggerFor]="menu" matTooltip="Actions" aria-label="Actions">
             <mat-icon>more_vert</mat-icon>
           </button>
+
           <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="openEditDialog(i, element)">
-              <mat-icon>edit</mat-icon>
-              <span>Edit</span>
+            <button mat-menu-item (click)="showTotaLists(element)">
+              <mat-icon>view_list</mat-icon>
+              <span>Total Lists</span>
             </button>
-            <button mat-menu-item (click)="openDeleteListDialog(i, element)">
-              <mat-icon>delete</mat-icon>
-              <span>Delete</span>
+            <button mat-menu-item (click)="showTotalAlarms(element)">
+              <mat-icon>notifications_active</mat-icon>
+              <span>Total Alarms</span>
             </button>
           </mat-menu>
         </td>
