@@ -48,6 +48,7 @@ import { AlarmComponent } from './alarm/alarm.component';
 import { AccountSavedSnackBarComponent } from './account/account-saved-snack-bar/account-saved-snack-bar.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UsersComponent } from './users/users.component';
+import { StatsComponent } from 'src/app/stats/stats.component';
 
 @NgModule({
     imports: [
@@ -97,7 +98,8 @@ import { UsersComponent } from './users/users.component';
         AlarmComponent,
         AccountSavedSnackBarComponent,
         RegistrationComponent,
-        UsersComponent
+        UsersComponent,
+        StatsComponent
     ],
     entryComponents: [
         EditListDialogComponent,
