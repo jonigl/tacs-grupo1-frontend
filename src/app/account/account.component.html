@@ -18,6 +18,11 @@
         </mat-form-field>
 
         <mat-form-field class="full-width">
+            <input matInput class="email-input" formControlName="emailControl" type="email" placeholder="Email address">
+            <mat-error *ngIf="emailControl.invalid">Invalid email address.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
             <input matInput class="firstname-input" formControlName="firstnameControl" placeholder="First name">
             <mat-error *ngIf="firstnameControl.invalid">First name must have 4 to 50 characters.</mat-error>
         </mat-form-field>
