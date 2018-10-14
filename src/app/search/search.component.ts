@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EventService } from 'src/app/_services/event.service';
-import { EventFilter } from 'src/app/_models';
+import { EventService, EventSearchFilter } from 'src/app/_services/event.service';
 import { Event } from 'src/app/_models/Event';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -37,8 +36,8 @@ export class SearchComponent implements OnInit {
         return this.searchForm.controls;
     }
 
-    getFilter(): EventFilter {
-        const filter = new EventFilter();
+    getFilter(): EventSearchFilter {
+        const filter = new EventSearchFilter();
         filter.q = this.getControls().keywordControl.value;
 
         return filter;
@@ -56,20 +55,21 @@ export class SearchComponent implements OnInit {
     }
 
     openAddEventDialog(event): void {
-    const dialogRef = this.dialog.open(SearchElementDialogComponent, {
-      width: '500px',
-      data: {
-        event: event
-      }
-    });
-    dialogRef.afterClosed().subscribe(list => {
-      if (list) {
-        this.spinner.show();
-        this.listService.addEvent(list, event).pipe(first()).subscribe(response => {
-          this.spinner.hide();
-          this.snackbar.open('Event added to ' + list.name, '', { duration: 3000 });
+        const dialogRef = this.dialog.open(SearchElementDialogComponent, {
+            width: '500px',
+            data: {
+                event: event
+            }
         });
-      }
-    });
+
+        dialogRef.afterClosed().subscribe(list => {
+            if (list) {
+                this.spinner.show();
+                this.listService.addEvent(list, event).pipe(first()).subscribe(response => {
+                    this.spinner.hide();
+                    this.snackbar.open('Event added to ' + list.name, '', { duration: 3000 });
+                });
+            }
+        });
     }
 }

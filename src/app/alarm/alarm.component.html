@@ -1,0 +1,102 @@
+<mat-toolbar>
+    <span>My alarms</span>
+</mat-toolbar>
+
+<mat-accordion>
+
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#ff4081" type="ball-scale-ripple-multiple"></ngx-spinner>
+
+    <mat-expansion-panel *ngFor="let alarm of alarms" (opened)="initEvents(alarm)">
+
+        <mat-expansion-panel-header class="alarm-header">
+            <mat-panel-title class="alarm-title">
+                <span [matBadge]="alarm.total_events_matched" matBadgeOverlap="false">
+                    {{ alarm.name }}
+                </span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div>
+            <mat-chip-list class="alarm-filter-list full-width">
+
+                <mat-chip *ngIf="alarm.filter.keyword" color="primary" selected>
+                    {{ alarm.filter.keyword }}
+                </mat-chip>
+
+                <mat-chip *ngIf="alarm.filter.startDateFrom" color="accent" selected>
+                    from {{ alarm.filter.startDateFrom }}
+                </mat-chip>
+
+                <mat-chip *ngIf="alarm.filter.startDateTo" color="accent" selected>
+                    to {{ alarm.filter.startDateTo }}
+                </mat-chip>
+                
+                <mat-chip *ngIf="alarm.filter.address" color="warn" selected>
+                    location: {{ alarm.filter.address }}
+                </mat-chip>
+
+                <mat-chip *ngIf="alarm.filter.price" color="warn" selected>
+                    price: {{ alarm.filter.price }}
+                </mat-chip>
+
+            </mat-chip-list>
+        </div>
+
+        <div class="alarm-event-table-container">
+            <mat-progress-bar mode="indeterminate" *ngIf="isLoading(alarm)"></mat-progress-bar>
+
+            <table mat-table class="alarm-event-table full-width" *ngIf="events" fxFlex="100" [dataSource]="events">
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let event"> {{ event.name }} </td>
+                </ng-container>
+            
+                <!-- Start date Column -->
+                <ng-container matColumnDef="start">
+                    <th mat-header-cell *matHeaderCellDef> Start date </th>
+                    <td mat-cell *matCellDef="let event"> {{ event.start }} </td>
+                </ng-container>
+            
+                <!-- Status Column -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let event"> {{ event.status }} </td>
+                </ng-container>
+
+                <!-- Action Column -->
+                <ng-container matColumnDef="action" stickyEnd>
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+
+                    <td mat-cell *matCellDef="let event; let i = index;">
+
+                        <button mat-button [matMenuTriggerFor]="eventMenu" matTooltip="Actions" aria-label="Actions">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+
+                        <mat-menu #eventMenu="matMenu">
+
+                            <button mat-menu-item (click)="openAddEventDialog(event)">
+                                <mat-icon>add</mat-icon>
+                                <span>Add to my list</span>
+                            </button>
+
+                            <button mat-menu-item (click)="openEventDialog(i, event)">
+                                <mat-icon>visibility</mat-icon>
+                                <span>Details</span>
+                            </button>
+
+                        </mat-menu>
+
+                    </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="eventColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: eventColumns;"></tr>
+            </table>
+        </div>
+
+    </mat-expansion-panel>
+
+</mat-accordion>

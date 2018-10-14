@@ -30,6 +30,10 @@ import {
     MatCardModule,
     MatTableModule,
     MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatBadgeModule,
+    MatChipsModule,
+    MatProgressBarModule,
     MatSnackBarModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -40,6 +44,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { EventDialogComponent } from './list/event-dialog/event-dialog.component';
 import { SearchElementDialogComponent } from './reusable/search-element-dialog/search-element-dialog.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { AlarmComponent } from './alarm/alarm.component';
 import { AccountSavedSnackBarComponent } from './account/account-saved-snack-bar/account-saved-snack-bar.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UsersComponent } from './users/users.component';
@@ -69,8 +74,12 @@ import { UsersComponent } from './users/users.component';
         MatTooltipModule,
         NgxSpinnerModule,
         MatSelectModule,
-        NgxMatSelectSearchModule,
-        MatSnackBarModule
+        MatExpansionModule,
+        MatBadgeModule,
+        MatChipsModule,
+        MatProgressBarModule,
+        MatSnackBarModule,
+        NgxMatSelectSearchModule
     ],
     declarations: [
         AppComponent,
@@ -85,6 +94,7 @@ import { UsersComponent } from './users/users.component';
         NewListDialogComponent,
         EventDialogComponent,
         SearchElementDialogComponent,
+        AlarmComponent,
         AccountSavedSnackBarComponent,
         RegistrationComponent,
         UsersComponent

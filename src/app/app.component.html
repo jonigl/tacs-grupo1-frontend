@@ -29,9 +29,9 @@
                 <div *ngIf="isUser()">
                     <a mat-list-item routerLink="/">Home</a>
                     <a mat-list-item routerLink="/search">Search Events</a>
-                    <a mat-list-item routerLink="/lists">My Lists</a>
-                    <a mat-list-item href="#">My Alarms</a>
-                    <a mat-list-item routerLink="/account">Account</a>
+                    <a mat-list-item [routerLink]="['/lists']">My Lists</a>
+                    <a mat-list-item routerLink="/alarms">My Alarms</a>
+                    <a mat-list-item routerLink="/account">Manage</a>
                 </div>
 
                 <!-- Admin -->

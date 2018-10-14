@@ -26,6 +26,8 @@ export class AccountComponent implements OnInit {
 
     passwordControl = new FormControl('', Validators.maxLength(100));
 
+    emailControl = new FormControl('', Validators.email);
+
     firstnameControl = new FormControl('', Validators.compose([
         Validators.minLength(4),
         Validators.maxLength(50)
@@ -53,6 +55,7 @@ export class AccountComponent implements OnInit {
         this.basicInfoForm = this.formBuilder.group({
             usernameControl: this.usernameControl,
             passwordControl: this.passwordControl,
+            emailControl: this.emailControl,
             firstnameControl: this.firstnameControl,
             lastnameControl: this.lastnameControl
         });
@@ -60,6 +63,7 @@ export class AccountComponent implements OnInit {
 
     initValues() {
         this.usernameControl.setValue(this.user.username);
+        this.emailControl.setValue(this.user.email);
         this.firstnameControl.setValue(this.user.firstname);
         this.lastnameControl.setValue(this.user.lastname);
     }
@@ -82,6 +86,7 @@ export class AccountComponent implements OnInit {
         const userRequest: UserRequest = {
             username: this.usernameControl.value.toString(),
             password: this.passwordControl.value ? this.passwordControl.value.toString() : null,
+            email: this.emailControl.value.toString(),
             firstname: this.firstnameControl.value.toString(),
             lastname: this.lastnameControl.value.toString(),
             telegramUserId: this.getTelegramUserId()
