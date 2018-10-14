@@ -1,0 +1,75 @@
+<mat-toolbar>
+    <span>My alarms</span>
+</mat-toolbar>
+
+<mat-accordion>
+
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#ff4081" type="ball-scale-ripple-multiple"></ngx-spinner>
+
+    <mat-expansion-panel *ngFor="let alarm of alarms" (opened)="initEvents(alarm)">
+
+        <mat-expansion-panel-header class="alarm-header">
+            <mat-panel-title class="alarm-title">
+                <span [matBadge]="alarm.total_events_matched" matBadgeOverlap="false">
+                    {{ alarm.name }}
+                </span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div>
+            <mat-chip-list class="alarm-filter-list full-width">
+
+                <mat-chip *ngIf="alarm.filter.keyword" color="primary" selected>
+                    {{ alarm.filter.keyword }}
+                </mat-chip>
+
+                <mat-chip *ngIf="alarm.filter.startDateFrom" color="accent" selected>
+                    from {{ alarm.filter.startDateFrom }}
+                </mat-chip>
+
+                <mat-chip *ngIf="alarm.filter.startDateTo" color="accent" selected>
+                    to {{ alarm.filter.startDateTo }}
+                </mat-chip>
+                
+                <mat-chip *ngIf="alarm.filter.address" color="warn" selected>
+                    location: {{ alarm.filter.address }}
+                </mat-chip>
+
+                <mat-chip *ngIf="alarm.filter.price" color="warn" selected>
+                    price: {{ alarm.filter.price }}
+                </mat-chip>
+
+            </mat-chip-list>
+        </div>
+
+        <div class="alarm-event-table-container">
+            <mat-progress-bar mode="indeterminate" *ngIf="isLoading(alarm)"></mat-progress-bar>
+
+            <table mat-table class="alarm-event-table full-width" *ngIf="events" fxFlex="100" [dataSource]="events">
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let event"> {{ event.name }} </td>
+                </ng-container>
+            
+                <!-- Start date Column -->
+                <ng-container matColumnDef="start">
+                    <th mat-header-cell *matHeaderCellDef> Start date </th>
+                    <td mat-cell *matCellDef="let event"> {{ event.start }} </td>
+                </ng-container>
+            
+                <!-- Status Column -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let event"> {{ event.status }} </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="['name', 'start', 'status']"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['name', 'start', 'status'];"></tr>
+            </table>
+        </div>
+
+    </mat-expansion-panel>
+
+</mat-accordion>

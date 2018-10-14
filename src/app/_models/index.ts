@@ -5,3 +5,5 @@ export * from './UserRequest';
 export * from './Event';
 export * from './EventFilter';
 export * from './EventId';
+export * from './Alarm';
+export * from './AlarmSummary';
