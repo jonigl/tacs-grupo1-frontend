@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatSort, MatTable, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatSort, MatTable, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { first } from 'rxjs/operators';
 import { List, Event } from '../_models';
@@ -30,6 +30,7 @@ export class ListComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private listService: ListService,
+    private snackbar: MatSnackBar,
     public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -38,8 +39,12 @@ export class ListComponent implements OnInit {
       this.spinner.hide();
       this.lists = page.content;
       this.dataSourceLists = new MatTableDataSource(this.lists);
-      this.dataSourceLists.sort = this.sort;
-      this.currentList(this.lists[0]);
+      if (this.lists.length > 0) {
+        this.dataSourceLists.sort = this.sort;
+        this.currentList(this.lists[0]);
+      } else {
+        this.snackbar.open('No lists found', '', { duration: 3000 });
+      }
     });
   }
 
@@ -78,6 +83,7 @@ export class ListComponent implements OnInit {
           list.id = response.id;
           _this.dataSourceLists.data.push(list);
           _this.listTable.renderRows();
+          this.snackbar.open('New list added', '', { duration: 3000 });
         });
       }
     });
@@ -98,6 +104,7 @@ export class ListComponent implements OnInit {
         this.listService.update(listUpdated).pipe(first()).subscribe(response => {
           this.spinner.hide();
           list.name = response.name;
+          this.snackbar.open('List edited', '', { duration: 3000 });
         });
       }
     });
@@ -119,6 +126,7 @@ export class ListComponent implements OnInit {
           this.spinner.hide();
           _this.dataSourceLists.data.splice(index, 1);
           _this.listTable.renderRows();
+          this.snackbar.open('List deleted', '', { duration: 3000 });
         });
       }
     });
@@ -140,6 +148,7 @@ export class ListComponent implements OnInit {
           this.spinner.hide();
           _this.dataSourceEvents.data.splice(index, 1);
           _this.eventTable.renderRows();
+          this.snackbar.open('Event deleted', '', { duration: 3000 });
         });
       }
     });
