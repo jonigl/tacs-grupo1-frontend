@@ -1,37 +1,44 @@
 ﻿<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-    
+
     <mat-toolbar color="primary" class="example-toolbar">
 
-        <button mat-icon-button (click)="snav.toggle()">
+        <button mat-icon-button (click)="snav.toggle()" *ngIf="isLoggedIn()">
             <mat-icon>menu</mat-icon>
         </button>
 
         <h1 class="example-app-name">Event App</h1>
+
         <span class="example-spacer"></span>
-        <button mat-button [matMenuTriggerFor]="menu"><span>Session</span><mat-icon class="example-icon">account_box</mat-icon></button>
+
+        <button mat-button [matMenuTriggerFor]="menu" *ngIf="isLoggedIn()"><span>Session</span>
+            <mat-icon class="example-icon">account_box</mat-icon>
+        </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>Profile</button>
-          <button mat-menu-item [routerLink]="['/login']" >Logout</button>
+            <button mat-menu-item>Profile</button>
+            <button mat-menu-item [routerLink]="['/login']">Logout</button>
         </mat-menu>
 
     </mat-toolbar>
 
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
 
-        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+        <mat-sidenav class="sidenav-menu" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
             fixedTopGap="56">
             <mat-nav-list>
                 <!-- User -->
-                <a mat-list-item routerLink="/search">Search Events</a>        
-                <a mat-list-item [routerLink]="['/lists']">My Lists</a>
-                <a mat-list-item href="#">My Alarms</a>
-                <a mat-list-item routerLink="/account">Manage</a>
+                <div *ngIf="isUser()">
+                    <a mat-list-item routerLink="/search">Search Events</a>
+                    <a mat-list-item [routerLink]="['/lists']">My Lists</a>
+                    <a mat-list-item href="#">My Alarms</a>
+                    <a mat-list-item routerLink="/account">Manage</a>
+                </div>
 
                 <!-- Admin -->
-                <a mat-list-item href="#">Users</a>
-                <a mat-list-item href="#">Statics</a>
-                <a mat-list-item href="#">Compare Lists</a>
-                <a mat-list-item href="#"></a>
+                <div *ngIf="isAdmin()">
+                    <a mat-list-item href="#">Users</a>
+                    <a mat-list-item href="#">Statics</a>
+                    <a mat-list-item href="#">Compare Lists</a>
+                </div>
             </mat-nav-list>
         </mat-sidenav>
 

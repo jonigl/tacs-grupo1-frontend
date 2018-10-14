@@ -29,7 +29,8 @@ import {
     MatInputModule,
     MatCardModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';
@@ -39,6 +40,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { EventDialogComponent } from './list/event-dialog/event-dialog.component';
 import { SearchElementDialogComponent } from './reusable/search-element-dialog/search-element-dialog.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { AccountSavedSnackBarComponent } from './account/account-saved-snack-bar/account-saved-snack-bar.component';
 
 @NgModule({
     imports: [
@@ -65,7 +67,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
         MatTooltipModule,
         NgxSpinnerModule,
         MatSelectModule,
-        NgxMatSelectSearchModule
+        NgxMatSelectSearchModule,
+        MatSnackBarModule
     ],
     declarations: [
         AppComponent,
@@ -79,14 +82,16 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
         DeleteDialogComponent,
         NewListDialogComponent,
         EventDialogComponent,
-        SearchElementDialogComponent
+        SearchElementDialogComponent,
+        AccountSavedSnackBarComponent
     ],
     entryComponents: [
         EditListDialogComponent,
         DeleteDialogComponent,
         NewListDialogComponent,
         EventDialogComponent,
-        SearchElementDialogComponent
+        SearchElementDialogComponent,
+        AccountSavedSnackBarComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
