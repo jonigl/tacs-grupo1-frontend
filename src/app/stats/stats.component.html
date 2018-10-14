@@ -31,6 +31,12 @@
             <mat-datepicker #dateToPicker></mat-datepicker>
         </mat-form-field>
 
+        <mat-card-content>
+            <h3>
+                Total events: {{ eventCount }}
+            </h3>
+        </mat-card-content>
+
         <table mat-table #eventTable [dataSource]="datasourceEvents" fxFlex="100" matSort>
 
             <ng-container matColumnDef="name">

@@ -22,6 +22,8 @@ export class StatsComponent implements OnInit {
 
     events: Event[];
 
+    eventCount: number;
+
     datasourceEvents: MatTableDataSource<Event>;
 
     eventColumns = ['name', 'start', 'status', 'action'];
@@ -57,6 +59,7 @@ export class StatsComponent implements OnInit {
             .pipe(first())
             .subscribe(page => {
                 this.events = page.content;
+                this.eventCount = page.total;
                 this.datasourceEvents = new MatTableDataSource(this.events);
 
                 this.spinner.hide();
