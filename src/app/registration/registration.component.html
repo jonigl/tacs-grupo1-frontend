@@ -1,0 +1,48 @@
+<mat-toolbar-row>
+    <span>Register a new user</span>
+</mat-toolbar-row>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>New user</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Firstname</mat-label>
+                <input matInput formControlName="firstnameControl" placeholder="John" required>
+                <mat-icon matSuffix>face</mat-icon>
+                <mat-hint>Please use real information</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Lastname</mat-label>
+                <input matInput formControlName="lastnameControl" placeholder="Doe" required>
+                <mat-icon matSuffix>face</mat-icon>
+                <mat-hint>Please use real information</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>email</mat-label>
+                <input matInput formControlName="emailControl" placeholder="johndoe@mail.com" required>
+                <mat-icon matSuffix>mail_outline</mat-icon>
+                <mat-hint>Do not worry, we're not going to send you spam</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="usernameControl" placeholder="johndoe123" required>
+                <mat-icon matSuffix>account_box</mat-icon>
+                <mat-hint>Try to be creative</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="passwordControl" type="password" placeholder="J0Dn_H031" required>
+                <mat-icon matSuffix>https</mat-icon>
+                <mat-hint>With great power comes great responsibility</mat-hint>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" [disabled]="registrationForm.invalid">Register</button>
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -33,7 +33,8 @@ import {
     MatExpansionModule,
     MatBadgeModule,
     MatChipsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';
@@ -44,6 +45,8 @@ import { EventDialogComponent } from './list/event-dialog/event-dialog.component
 import { SearchElementDialogComponent } from './reusable/search-element-dialog/search-element-dialog.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { AlarmComponent } from './alarm/alarm.component';
+import { AccountSavedSnackBarComponent } from './account/account-saved-snack-bar/account-saved-snack-bar.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
     imports: [
@@ -74,6 +77,7 @@ import { AlarmComponent } from './alarm/alarm.component';
         MatBadgeModule,
         MatChipsModule,
         MatProgressBarModule,
+        MatSnackBarModule,
         NgxMatSelectSearchModule
     ],
     declarations: [
@@ -89,14 +93,17 @@ import { AlarmComponent } from './alarm/alarm.component';
         NewListDialogComponent,
         EventDialogComponent,
         SearchElementDialogComponent,
-        AlarmComponent
+        AlarmComponent,
+        AccountSavedSnackBarComponent,
+        RegistrationComponent
     ],
     entryComponents: [
         EditListDialogComponent,
         DeleteDialogComponent,
         NewListDialogComponent,
         EventDialogComponent,
-        SearchElementDialogComponent
+        SearchElementDialogComponent,
+        AccountSavedSnackBarComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

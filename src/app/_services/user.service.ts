@@ -19,4 +19,8 @@ export class UserService {
     updateUser(user: UserRequest) {
         return this.http.patch<User>(`${environment.apiUrl}/users/info`, user);
     }
+
+    create(user: User) {
+        return this.http.post<User>(`${environment.apiUrl}/users`, user);
+    }
 }

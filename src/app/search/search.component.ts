@@ -4,7 +4,7 @@ import { Event } from 'src/app/_models/Event';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SearchElementDialogComponent } from '../reusable/search-element-dialog/search-element-dialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ListService } from '../_services';
 import { first } from 'rxjs/operators';
 
@@ -16,8 +16,6 @@ import { first } from 'rxjs/operators';
 export class SearchComponent implements OnInit {
 
     searchForm: FormGroup;
-
-    loading: boolean;
     events: Event[];
 
     constructor(
@@ -25,6 +23,7 @@ export class SearchComponent implements OnInit {
         private spinner: NgxSpinnerService,
         public dialog: MatDialog,
         private listService: ListService,
+        private snackbar: MatSnackBar,
         private eventService: EventService) { }
 
     ngOnInit() {
@@ -68,6 +67,7 @@ export class SearchComponent implements OnInit {
                 this.spinner.show();
                 this.listService.addEvent(list, event).pipe(first()).subscribe(response => {
                     this.spinner.hide();
+                    this.snackbar.open('Event added to ' + list.name, '', { duration: 3000 });
                 });
             }
         });

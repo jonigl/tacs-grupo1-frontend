@@ -4,11 +4,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../_services';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MatSnackBar } from '@angular/material';
 
-@Component({templateUrl: 'login.component.html'})
+@Component({
+    templateUrl: 'login.component.html',
+    styleUrls: ['login.component.css']
+})
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
-    loading = false;
     submitted = false;
     returnUrl: string;
     error = '';
@@ -17,8 +20,9 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
+        private snackbar: MatSnackBar,
         private spinner: NgxSpinnerService,
-        private authenticationService: AuthenticationService) {}
+        private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
@@ -30,7 +34,7 @@ export class LoginComponent implements OnInit {
         this.authenticationService.logout();
 
         // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/search';
     }
 
     // convenience getter for easy access to form fields
@@ -54,8 +58,9 @@ export class LoginComponent implements OnInit {
                     this.spinner.hide();
                 },
                 error => {
+                    this.snackbar.open(error, '', { duration: 1000 });
                     this.error = error;
-                    this.loading = false;
+                    this.spinner.hide();
                 });
     }
 }
