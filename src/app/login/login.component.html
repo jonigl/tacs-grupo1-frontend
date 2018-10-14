@@ -1,8 +1,4 @@
-﻿<!-- <div class="alert alert-info">
-    Username: test<br />
-    Password: test
-</div> -->
-<div class="top-spacer" fxLayout="column" fxLayoutAlign="space-between center">
+﻿<div class="top-spacer" fxLayout="column" fxLayoutAlign="space-between center">
     <mat-card class="bigger-card" fxLayout="column" fxLayoutAlign="space-between center"> 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <mat-card-header>
@@ -31,11 +27,10 @@
                 </table>
             </mat-card-content>
             <mat-card-actions align="center">
-                <button mat-raised-button [disabled]="loading">Register</button>
-                <button mat-raised-button color="primary" type="submit" [disabled]="loading">Login</button>
+                <button mat-raised-button>Register</button>
+                <button mat-raised-button color="primary" type="submit">Login</button>
             </mat-card-actions>
         </form>
-        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
     </mat-card>
     <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#ff4081" type="ball-scale-ripple-multiple"></ngx-spinner>
 </div>

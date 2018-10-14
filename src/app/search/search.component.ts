@@ -17,8 +17,6 @@ import { first } from 'rxjs/operators';
 export class SearchComponent implements OnInit {
 
     searchForm: FormGroup;
-
-    loading: boolean;
     events: Event[];
 
     constructor(
