@@ -47,6 +47,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { AlarmComponent } from './alarm/alarm.component';
 import { AccountSavedSnackBarComponent } from './account/account-saved-snack-bar/account-saved-snack-bar.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
     imports: [
@@ -95,7 +96,8 @@ import { RegistrationComponent } from './registration/registration.component';
         SearchElementDialogComponent,
         AlarmComponent,
         AccountSavedSnackBarComponent,
-        RegistrationComponent
+        RegistrationComponent,
+        UsersComponent
     ],
     entryComponents: [
         EditListDialogComponent,
