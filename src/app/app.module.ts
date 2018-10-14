@@ -41,6 +41,7 @@ import { EventDialogComponent } from './list/event-dialog/event-dialog.component
 import { SearchElementDialogComponent } from './reusable/search-element-dialog/search-element-dialog.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { AccountSavedSnackBarComponent } from './account/account-saved-snack-bar/account-saved-snack-bar.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
     imports: [
@@ -83,7 +84,8 @@ import { AccountSavedSnackBarComponent } from './account/account-saved-snack-bar
         NewListDialogComponent,
         EventDialogComponent,
         SearchElementDialogComponent,
-        AccountSavedSnackBarComponent
+        AccountSavedSnackBarComponent,
+        RegistrationComponent
     ],
     entryComponents: [
         EditListDialogComponent,
