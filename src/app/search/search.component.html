@@ -20,7 +20,7 @@
 
     </mat-card-header>
 
-    <ngx-masonry class="masonry-container" [options]='{ "fitWidth": true }'>
+    <ngx-masonry class="masonry-container" [useImagesLoaded]="true" [options]='{ "fitWidth": true }'>
         <ngxMasonryItem class="masonry-item" *ngFor="let event of events">
 
             <mat-card class="event-card">
