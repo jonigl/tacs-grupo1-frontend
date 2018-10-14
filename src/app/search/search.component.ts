@@ -56,19 +56,20 @@ export class SearchComponent implements OnInit {
     }
 
     openAddEventDialog(event): void {
-    const dialogRef = this.dialog.open(SearchElementDialogComponent, {
-      width: '500px',
-      data: {
-        event: event
-      }
-    });
-    dialogRef.afterClosed().subscribe(list => {
-      if (list) {
-        this.spinner.show();
-        this.listService.addEvent(list, event).pipe(first()).subscribe(response => {
-          this.spinner.hide();
+        const dialogRef = this.dialog.open(SearchElementDialogComponent, {
+            width: '500px',
+            data: {
+                event: event
+            }
         });
-      }
-    });
+
+        dialogRef.afterClosed().subscribe(list => {
+            if (list) {
+                this.spinner.show();
+                this.listService.addEvent(list, event).pipe(first()).subscribe(response => {
+                    this.spinner.hide();
+                });
+            }
+        });
     }
 }

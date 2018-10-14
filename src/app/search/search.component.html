@@ -31,6 +31,8 @@
                     </mat-card-title>
                 </mat-card-header>
 
+                <img mat-card-image class="event-logo-image" *ngIf="event.logo" [src]="event.logo" [alt]="event.name" height="50%">
+
                 <mat-card-content class="event-card-content">
                     <p>{{event.description}}</p>
                 </mat-card-content>
