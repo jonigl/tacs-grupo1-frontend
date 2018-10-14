@@ -1,0 +1,81 @@
+<mat-toolbar>
+  <h1>Manage system users</h1>
+</mat-toolbar>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title fxLayout="row" fxLayoutAlign="start center">
+      <mat-icon>people</mat-icon>
+      <h2 fxFlexOffset="10">Users</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+
+    <mat-form-field>
+      <input matInput (keyup)="applyFilterList($event.target.value)" placeholder="Filter users">
+    </mat-form-field>
+
+    <table mat-table fxFlex="100" #userTable [dataSource]="dataSourceUsers" matSort>
+
+
+      <!-- Username Column -->
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+        <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.username}} </td>
+      </ng-container>
+
+       <!-- Firstname Column -->
+       <ng-container matColumnDef="firstname">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
+          <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.firstname}} </td>
+        </ng-container>
+
+         <!-- Lastname Column -->
+      <ng-container matColumnDef="lastname">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
+          <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.lastname}} </td>
+        </ng-container>
+
+         <!-- email Column -->
+      <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
+          <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.email}} </td>
+        </ng-container>
+
+         <!-- TelegramUserId Column -->
+      <ng-container matColumnDef="telegramUserId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Telegram User Id </th>
+          <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.telegramUserId}} </td>
+        </ng-container>
+
+         <!-- Last Access Column -->
+      <ng-container matColumnDef="lastAccess">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Access </th>
+          <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.lastAccess}} </td>
+        </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element; let i = index;">
+          <button mat-button [matMenuTriggerFor]="menu" matTooltip="Actions" aria-label="Actions">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openEditDialog(i, element)">
+              <mat-icon>edit</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="openDeleteListDialog(i, element)">
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedUserColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedUserColumns;"></tr>
+    </table>
+
+  </mat-card-content>
+</mat-card>
