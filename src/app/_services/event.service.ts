@@ -34,10 +34,10 @@ export class EventService {
 
             const params: any = { page, size };
             if (from) {
-                params.from = from;
+                params.from = from.toISOString();
             }
             if (to) {
-                params.to = to;
+                params.to = to.toISOString();
             }
 
             return this.http.get<RestPage<Event>>(

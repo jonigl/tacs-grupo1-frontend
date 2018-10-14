@@ -9,12 +9,26 @@
             <mat-icon>event</mat-icon>
             <h2 fxFlexOffset="10">Events</h2>
         </mat-card-title>
+
+        <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#ff4081" type="ball-scale-ripple-multiple"></ngx-spinner>
     </mat-card-header>
 
     <mat-card-content fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
 
         <mat-form-field>
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter events">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput (dateChange)="setDateFrom($event)" [matDatepicker]="dateFromPicker" placeholder="From">
+            <mat-datepicker-toggle matSuffix [for]="dateFromPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateFromPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput (dateChange)="setDateTo($event)" [matDatepicker]="dateToPicker" placeholder="To">
+            <mat-datepicker-toggle matSuffix [for]="dateToPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateToPicker></mat-datepicker>
         </mat-form-field>
 
         <table mat-table #eventTable [dataSource]="datasourceEvents" fxFlex="100" matSort>

@@ -34,7 +34,9 @@ import {
     MatBadgeModule,
     MatChipsModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';
@@ -80,6 +82,8 @@ import { StatsComponent } from 'src/app/stats/stats.component';
         MatChipsModule,
         MatProgressBarModule,
         MatSnackBarModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         NgxMatSelectSearchModule
     ],
     declarations: [
