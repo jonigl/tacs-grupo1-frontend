@@ -34,7 +34,9 @@ import {
     MatBadgeModule,
     MatChipsModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';
@@ -48,6 +50,7 @@ import { AlarmComponent } from './alarm/alarm.component';
 import { AccountSavedSnackBarComponent } from './account/account-saved-snack-bar/account-saved-snack-bar.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UsersComponent } from './users/users.component';
+import { StatsComponent } from 'src/app/stats/stats.component';
 
 @NgModule({
     imports: [
@@ -79,6 +82,8 @@ import { UsersComponent } from './users/users.component';
         MatChipsModule,
         MatProgressBarModule,
         MatSnackBarModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         NgxMatSelectSearchModule
     ],
     declarations: [
@@ -97,7 +102,8 @@ import { UsersComponent } from './users/users.component';
         AlarmComponent,
         AccountSavedSnackBarComponent,
         RegistrationComponent,
-        UsersComponent
+        UsersComponent,
+        StatsComponent
     ],
     entryComponents: [
         EditListDialogComponent,

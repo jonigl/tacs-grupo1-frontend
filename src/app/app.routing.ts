@@ -8,6 +8,7 @@ import { AccountComponent } from 'src/app/account/account.component';
 import { AlarmComponent } from 'src/app/alarm/alarm.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UsersComponent } from './users/users.component';
+import { StatsComponent } from 'src/app/stats/stats.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
     { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
     { path: 'alarms', component: AlarmComponent, canActivate: [AuthGuard] },
     { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
+    { path: 'stats', component: StatsComponent, canActivate: [AuthGuard] },
     // otherwise redirect to home
     { path: '**', redirectTo: '' },
 ];

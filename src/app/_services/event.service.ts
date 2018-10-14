@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { RestPage, Event } from 'src/app/_models';
+import { RestPage, Event, TotalUsers } from 'src/app/_models';
 
 export class EventSearchFilter {
     q: string | null;
@@ -26,4 +26,31 @@ export class EventService {
         );
     }
 
+    getRegisteredEvents(
+        from: Date = null,
+        to: Date = null,
+        page: number = 0,
+        size: number = 50) {
+
+            const params: any = { page, size };
+            if (from) {
+                params.from = from.toISOString();
+            }
+            if (to) {
+                params.to = to.toISOString();
+            }
+
+            return this.http.get<RestPage<Event>>(
+                `${environment.apiUrl}/events/registered_events`,
+                { params }
+            );
+    }
+
+    getTotalInterestedUsers(event_id: string) {
+        const params: any = { event_id };
+        return this.http.get<TotalUsers>(
+            `${environment.apiUrl}/events/${event_id}/total_users`,
+            { params }
+        );
+    }
 }
