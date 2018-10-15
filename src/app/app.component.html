@@ -10,11 +10,11 @@
 
         <span class="example-spacer"></span>
 
-        <button mat-button [matMenuTriggerFor]="menu" *ngIf="authenticationService.isLoggedIn()"><span>Session</span>
+        <button mat-button [matMenuTriggerFor]="menu" *ngIf="authenticationService.isLoggedIn()"><span>{{ authenticationService.getUsername() }}</span>
             <mat-icon class="example-icon">account_box</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="/account">Account</button>
+            <button mat-menu-item *ngIf="authenticationService.isUser()" routerLink="/account">Account</button>
             <button mat-menu-item routerLink="/login">Logout</button>
         </mat-menu>
 

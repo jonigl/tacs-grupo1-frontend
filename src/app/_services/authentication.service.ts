@@ -82,4 +82,14 @@ export class AuthenticationService {
         }
         return roles.includes('ROLE_USER');
     }
+
+    getUsername() {
+        const myRawToken = this.getToken();
+        if (myRawToken === null) {
+            return null;
+        }
+        const helper = new JwtHelperService();
+        const decodedToken = helper.decodeToken(myRawToken);
+        return decodedToken.sub;
+    }
 }
