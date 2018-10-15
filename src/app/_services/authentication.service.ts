@@ -44,7 +44,7 @@ export class AuthenticationService {
         return null;
     }
 
-    whichRole() {
+    whichRole(): string {
         const myRawToken = this.getToken();
         if (myRawToken === null) {
             return null;
