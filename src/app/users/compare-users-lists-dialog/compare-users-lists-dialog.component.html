@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Compare users lists</h2>
+<mat-dialog-content fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="40px">
+  <div fxFlex="30">
+    <h4>User: {{ data.user1.details.username }}</h4>
+    <mat-selection-list #user1>
+      <mat-list-option *ngFor="let list of data.user1.lists">
+        {{list.name}}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+  <mat-divider [vertical]="true"></mat-divider>
+  <div fxFlex="30">
+    <h4>User: {{ data.user2.details.username }}</h4>
+    <mat-selection-list #user2>
+      <mat-list-option *ngFor="let list of data.user2.lists">
+        {{list.name}}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="compareLists()" cdkFocusInitial>Compare</button>
+  <button mat-button (click)="onNoClick()">Close</button>
+</mat-dialog-actions>

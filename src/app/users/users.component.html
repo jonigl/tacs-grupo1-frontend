@@ -16,6 +16,18 @@
 
     <table mat-table fxFlex="100" #userTable [dataSource]="dataSourceUsers" matSort>
 
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
 
       <!-- Username Column -->
       <ng-container matColumnDef="username">
@@ -23,35 +35,35 @@
         <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.username}} </td>
       </ng-container>
 
-       <!-- Firstname Column -->
-       <ng-container matColumnDef="firstname">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
-          <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.firstname}} </td>
-        </ng-container>
+      <!-- Firstname Column -->
+      <ng-container matColumnDef="firstname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
+        <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.firstname}} </td>
+      </ng-container>
 
-         <!-- Lastname Column -->
+      <!-- Lastname Column -->
       <ng-container matColumnDef="lastname">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
-          <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.lastname}} </td>
-        </ng-container>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
+        <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.lastname}} </td>
+      </ng-container>
 
-         <!-- email Column -->
+      <!-- email Column -->
       <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
-          <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.email}} </td>
-        </ng-container>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
+        <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.email}} </td>
+      </ng-container>
 
-         <!-- TelegramUserId Column -->
+      <!-- TelegramUserId Column -->
       <ng-container matColumnDef="telegramUserId">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Telegram User Id </th>
-          <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.telegramUserId}} </td>
-        </ng-container>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Telegram User Id </th>
+        <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.telegramUserId}} </td>
+      </ng-container>
 
-         <!-- Last Access Column -->
+      <!-- Last Access Column -->
       <ng-container matColumnDef="lastAccess">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Access </th>
-          <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.lastAccess}} </td>
-        </ng-container>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Access </th>
+        <td mat-cell *matCellDef="let element" (click)="currentUser(element)"> {{element.lastAccess}} </td>
+      </ng-container>
 
       <!-- Action Column -->
       <ng-container matColumnDef="action" stickyEnd>
@@ -79,4 +91,7 @@
     </table>
 
   </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="openDeleteListDialog()">Compare users lists</button>
+  </mat-card-actions>
 </mat-card>
