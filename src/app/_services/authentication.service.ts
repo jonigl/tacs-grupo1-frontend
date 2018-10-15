@@ -44,7 +44,7 @@ export class AuthenticationService {
         return null;
     }
 
-    whichRole() {
+    whichRole(): string {
         const myRawToken = this.getToken();
         if (myRawToken === null) {
             return null;
@@ -81,5 +81,15 @@ export class AuthenticationService {
             return false;
         }
         return roles.includes('ROLE_USER');
+    }
+
+    getUsername() {
+        const myRawToken = this.getToken();
+        if (myRawToken === null) {
+            return null;
+        }
+        const helper = new JwtHelperService();
+        const decodedToken = helper.decodeToken(myRawToken);
+        return decodedToken.sub;
     }
 }

@@ -58,7 +58,6 @@ export class ListComponent implements OnInit {
 
   currentList(list) {
     this.selectedList = list;
-    console.log(list);
     this.spinner.show();
     this.listService.getAllEvents(list).pipe(first()).subscribe(page => {
       this.spinner.hide();

@@ -1,6 +1,7 @@
 ﻿import {MediaMatcher} from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, ViewChild } from '@angular/core';
 import { AuthenticationService } from './_services';
+import { MatSidenav } from '@angular/material';
 
 @Component({
     selector: 'app-root',
@@ -10,6 +11,7 @@ import { AuthenticationService } from './_services';
 })
 
 export class AppComponent implements OnDestroy {
+    @ViewChild('snav') snav: MatSidenav;
     mobileQuery: MediaQueryList;
     private _mobileQueryListener: () => void;
 
@@ -26,19 +28,5 @@ export class AppComponent implements OnDestroy {
     ngOnDestroy(): void {
         this.mobileQuery.removeListener(this._mobileQueryListener);
     }
-
-    isLoggedIn() {
-        return this.authenticationService.isLoggedIn();
-    }
-
-    isUser() {
-        return this.authenticationService.isUser();
-    }
-
-    isAdmin() {
-        return this.authenticationService.isAdmin();
-    }
-
-
 
 }
