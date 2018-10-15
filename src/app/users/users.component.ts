@@ -62,7 +62,6 @@ export class UsersComponent implements OnInit {
 
   showTotaLists(user: User) {
     this.userService.getTotalLists(user).pipe(first()).subscribe(response => {
-      console.log(response);
       this.snackbar.open(`Total lists: ${response.totalLists}`, '', { duration: 3000 });
     });
   }

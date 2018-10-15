@@ -7,7 +7,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
-import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { SearchComponent } from './search/search.component';
 import { ListComponent } from './list/list.component';
@@ -95,7 +94,6 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
     ],
     declarations: [
         AppComponent,
-        HomeComponent,
         LoginComponent,
         SearchComponent,
         ListComponent,
