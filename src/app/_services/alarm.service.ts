@@ -59,4 +59,8 @@ export class AlarmService {
             { params }
         );
     }
+
+    delete(alarm: Alarm) {
+        return this.http.delete<Alarm>(`${environment.apiUrl}/alarms/${alarm.id}`);
+    }
 }
