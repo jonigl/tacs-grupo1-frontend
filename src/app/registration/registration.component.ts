@@ -77,7 +77,7 @@ export class RegistrationComponent implements OnInit {
       this.spinner.show();
       this.userService.create(this.getUser()).pipe(first()).subscribe(response => {
         this.spinner.hide();
-        this.snackbar.open('User register', '', { duration: 1000 });
+        this.snackbar.open('Successfully registered user!', '', { duration: 1000 });
         setTimeout(() => {
           this.router.navigate(['login']);
         }, 3000);

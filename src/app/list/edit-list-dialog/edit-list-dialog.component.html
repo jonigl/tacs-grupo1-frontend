@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Edit list {{ data.list.name }}</h1>
 <div mat-dialog-content>
   <mat-form-field>
-    <input matInput [(ngModel)]="newName" (keyup.enter)="onEnter()" cdkFocusInitial>
+    <input matInput placeholder="New name" [(ngModel)]="newName" (keyup.enter)="onEnter()" cdkFocusInitial>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>

@@ -2,7 +2,7 @@
 
     <mat-toolbar color="primary" class="example-toolbar">
 
-        <button mat-icon-button (click)="snav.toggle()" *ngIf="isLoggedIn()">
+        <button mat-icon-button (click)="snav.toggle()" *ngIf="authenticationService.isLoggedIn()">
             <mat-icon>menu</mat-icon>
         </button>
 
@@ -10,7 +10,7 @@
 
         <span class="example-spacer"></span>
 
-        <button mat-button [matMenuTriggerFor]="menu" *ngIf="isLoggedIn()"><span>Session</span>
+        <button mat-button [matMenuTriggerFor]="menu" *ngIf="authenticationService.isLoggedIn()"><span>Session</span>
             <mat-icon class="example-icon">account_box</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
@@ -22,11 +22,11 @@
 
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
 
-        <mat-sidenav class="sidenav-menu" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+        <mat-sidenav *ngIf="authenticationService.isLoggedIn()" class="sidenav-menu" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
             fixedTopGap="56">
             <mat-nav-list>
                 <!-- User -->
-                <div *ngIf="isUser()">
+                <div *ngIf="authenticationService.isUser()">
                     <a mat-list-item routerLink="/">Home</a>
                     <a mat-list-item routerLink="/search">Search Events</a>
                     <a mat-list-item routerLink="/lists">My Lists</a>
@@ -35,7 +35,7 @@
                 </div>
 
                 <!-- Admin -->
-                <div *ngIf="isAdmin()">
+                <div *ngIf="authenticationService.isAdmin()">
                     <a mat-list-item routerLink="/">Home</a>
                     <a mat-list-item routerLink="/users">Users</a>
                     <a mat-list-item routerLink="/stats">Stats</a>                    
