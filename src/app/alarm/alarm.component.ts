@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { AlarmSummary, Event } from 'src/app/_models';
+import { AlarmSummary, Event, Alarm } from 'src/app/_models';
 import { AlarmService } from 'src/app/_services/alarm.service';
 import { first } from 'rxjs/internal/operators/first';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -8,6 +8,7 @@ import { EventDialogComponent } from 'src/app/list/event-dialog/event-dialog.com
 import { SearchElementDialogComponent } from 'src/app/reusable/search-element-dialog/search-element-dialog.component';
 import { ListService } from 'src/app/_services';
 import { AlarmDialogComponent } from 'src/app/alarm/alarm-dialog/alarm-dialog.component';
+import { DeleteDialogComponent } from '../reusable/delete-dialog/delete-dialog.component';
 
 @Component({
     selector: 'app-alarm',
@@ -104,6 +105,29 @@ export class AlarmComponent implements OnInit {
                     .pipe(first())
                     .subscribe(response => {
                         this.spinner.hide();
+                    });
+            }
+        });
+    }
+
+    openDeleteAlarmDialog(index, alarm: Alarm): void {
+        const dialogRef = this.dialog.open(DeleteDialogComponent, {
+            width: '350px',
+            data: {
+                name: alarm.name,
+                type: 'alarm'
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.spinner.show();
+                this.alarmService.delete(alarm)
+                    .pipe(first())
+                    .subscribe(response => {
+                        this.spinner.hide();
+                        this.alarms.splice(index, 1);
+                        this.snackbar.open(`Alarm ${alarm.name} deleted.`, '', { duration: 3000 });
                     });
             }
         });

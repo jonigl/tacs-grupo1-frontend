@@ -16,7 +16,7 @@
 
         <mat-accordion>
 
-            <mat-expansion-panel *ngFor="let alarm of alarms" (opened)="initEvents(alarm)">
+            <mat-expansion-panel *ngFor="let alarm of alarms; let i = index;" (opened)="initEvents(alarm)">
 
                 <mat-expansion-panel-header class="alarm-header">
                     <mat-panel-title class="alarm-title">
@@ -109,6 +109,10 @@
                     </table>
 
                 </div>
+
+                <mat-action-row>    
+                    <button mat-button color="primary" (click)="openDeleteAlarmDialog(i, alarm)" matTooltip="Delete alarm"><mat-icon>delete</mat-icon></button>
+                </mat-action-row>
 
             </mat-expansion-panel>
 
