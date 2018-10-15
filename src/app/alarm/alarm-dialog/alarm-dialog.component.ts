@@ -62,7 +62,7 @@ export class AlarmDialogComponent implements OnInit {
         this.alarmService.add(alarmRequest)
             .pipe(first())
             .subscribe(alarm => {
-                this.snackbar.open(`New alarm "${alarm.name} added."`, '', { duration: 3000 });
+                this.snackbar.open(`New alarm "${alarm.name}" added.`, '', { duration: 3000 });
                 this.dialogRef.close(true);
             });
     }

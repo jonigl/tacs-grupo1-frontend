@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort, MatSnackBar, MatTable, MatDialog, MatDatepickerInputEvent } from '@angular/material';
+import { MatTableDataSource, MatSort, MatSnackBar, MatTable, MatDialog, MatDatepickerInputEvent, MatChip } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { Event } from 'src/app/_models';
 import { EventService } from 'src/app/_services/event.service';
@@ -9,6 +9,8 @@ import { filter } from 'rxjs/internal/operators/filter';
 import { EventDialogComponent } from 'src/app/list/event-dialog/event-dialog.component';
 import { SearchElementDialogComponent } from 'src/app/reusable/search-element-dialog/search-element-dialog.component';
 import { ListService } from 'src/app/_services';
+
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-stats',
@@ -28,8 +30,13 @@ export class StatsComponent implements OnInit {
 
     eventColumns = ['name', 'start', 'status', 'action'];
 
+    dateFromControl = new FormControl();
+    dateToControl = new FormControl();
+
     dateFrom: Date = null;
     dateTo: Date = null;
+
+    dateFilters: Map<string, Date[]>;
 
     constructor(
         private spinner: NgxSpinnerService,
@@ -39,6 +46,35 @@ export class StatsComponent implements OnInit {
         private eventService: EventService) { }
 
     ngOnInit() {
+        this.initDateFilters();
+        this.fetchEvents();
+    }
+
+    initDateFilters() {
+        const today = moment();
+        const tomorrow = moment(today).add(1, 'days');
+        const treeDaysBefore = moment(today).subtract(3, 'days');
+        const oneWeekBefore = moment(today).subtract(1, 'weeks');
+        const oneMonthBefore = moment(today).subtract(1, 'months');
+
+        this.dateFilters = new Map();
+
+        this.dateFilters.set('today', [today.toDate(), tomorrow.toDate()]);
+        this.dateFilters.set('last3Days', [treeDaysBefore.toDate(), tomorrow.toDate()]);
+        this.dateFilters.set('lastWeek', [oneWeekBefore.toDate(), tomorrow.toDate()]);
+        this.dateFilters.set('lastMonth', [oneMonthBefore.toDate(), tomorrow.toDate()]);
+    }
+
+    setDateFilter(value: string) {
+        if (value === 'allTime') {
+            this.dateFromControl.setValue('');
+            this.dateToControl.setValue('');
+        } else {
+            const dates = this.dateFilters.get(value);
+            this.dateFromControl.setValue(dates[0]);
+            this.dateToControl.setValue(dates[1]);
+        }
+
         this.fetchEvents();
     }
 
