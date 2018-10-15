@@ -37,7 +37,8 @@ import {
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatStepperModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';
@@ -53,6 +54,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { UsersComponent } from './users/users.component';
 import { StatsComponent } from 'src/app/stats/stats.component';
 import { CompareUsersListsDialogComponent } from './users/compare-users-lists-dialog/compare-users-lists-dialog.component';
+import { CdkStepperModule } from '@angular/cdk/stepper';
 
 @NgModule({
     imports: [
@@ -87,7 +89,8 @@ import { CompareUsersListsDialogComponent } from './users/compare-users-lists-di
         MatDatepickerModule,
         MatNativeDateModule,
         NgxMatSelectSearchModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatStepperModule
     ],
     declarations: [
         AppComponent,

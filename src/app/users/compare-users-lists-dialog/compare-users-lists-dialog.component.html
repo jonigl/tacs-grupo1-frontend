@@ -1,25 +1,52 @@
 <h2 mat-dialog-title>Compare users lists</h2>
-<mat-dialog-content fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="40px">
-  <div fxFlex="30">
-    <h4>User: {{ data.user1.details.username }}</h4>
-    <mat-selection-list #user1>
-      <mat-list-option *ngFor="let list of data.user1.lists">
-        {{list.name}}
-      </mat-list-option>
-    </mat-selection-list>
-  </div>
-  <mat-divider [vertical]="true"></mat-divider>
-  <div fxFlex="30">
-    <h4>User: {{ data.user2.details.username }}</h4>
-    <mat-selection-list #user2>
-      <mat-list-option *ngFor="let list of data.user2.lists">
-        {{list.name}}
-      </mat-list-option>
-    </mat-selection-list>
-  </div>
+<mat-dialog-content>
 
+  <mat-horizontal-stepper linear="true" #stepper>
+
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>{{ data.user1.details.username }}</ng-template>
+        <mat-form-field>
+          <mat-select placeholder="Lists" [(value)]="listUser1" formControlName="firstCtrl" required>
+            <mat-option *ngFor="let list of data.user1.lists" [value]="list">
+              {{list.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>{{ data.user2.details.username }}</ng-template>
+        <mat-form-field>
+          <mat-select placeholder="Lists" [(value)]="listUser2" formControlName="secondCtrl" required>
+            <mat-option *ngFor="let list of data.user2.lists" [value]="list" required>
+              {{list.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext (click)="compareLists()">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-raised-button color="primary" (click)="compareLists()" cdkFocusInitial>Compare</button>
   <button mat-button (click)="onNoClick()">Close</button>
 </mat-dialog-actions>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#ff4081" type="ball-scale-ripple-multiple"></ngx-spinner>

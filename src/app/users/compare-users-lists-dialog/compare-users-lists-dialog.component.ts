@@ -1,7 +1,10 @@
-import { Component, Inject, ViewChild, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSelectionList, MatListOption } from '@angular/material';
 import { List } from 'src/app/_models';
-import { SelectionModel } from '@angular/cdk/collections';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ListService } from 'src/app/_services';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-compare-users-lists-dialog',
@@ -9,22 +12,37 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./compare-users-lists-dialog.component.css']
 })
 export class CompareUsersListsDialogComponent implements OnInit {
-  @ViewChild(MatSelectionList) user1: MatSelectionList;
-  @ViewChild(MatSelectionList) user2: MatSelectionList;
-  user1Lists: List[];
-  user2Lists: List[];
+  listUser1: List;
+  listUser2: List;
 
   constructor(
     public dialogRef: MatDialogRef<CompareUsersListsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: object) {}
+    private _formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService,
+    private listService: ListService,
+    @Inject(MAT_DIALOG_DATA) public data: object) { }
 
-    ngOnInit() {
-      this.user1.selectedOptions = new SelectionModel<MatListOption>(false);
-      this.user2.selectedOptions = new SelectionModel<MatListOption>(false);
-    }
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
 
-    onNoClick(): void {
-      this.dialogRef.close(false);
-    }
+  ngOnInit() {
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close(false);
+  }
+
+  compareLists() {
+    this.spinner.show();
+    this.listService.compare(this.listUser1, this.listUser2).pipe(first()).subscribe(response => {
+      this.spinner.hide();
+    });
+  }
 
 }
