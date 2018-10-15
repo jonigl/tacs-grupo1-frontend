@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { RestPage, Alarm, AlarmSummary, Event } from 'src/app/_models';
+import { RestPage, Alarm, AlarmSummary, Event, AlarmRequest } from 'src/app/_models';
 
 @Injectable({
     providedIn: 'root'
@@ -9,6 +9,32 @@ import { RestPage, Alarm, AlarmSummary, Event } from 'src/app/_models';
 export class AlarmService {
 
     constructor(private http: HttpClient) { }
+
+    add(alarmRequest: AlarmRequest) {
+        const body: any = { name: alarmRequest.name };
+
+        if (alarmRequest.keyword) {
+            body.keyword = alarmRequest.keyword;
+        }
+
+        if (alarmRequest.address) {
+            body.address = alarmRequest.address;
+        }
+
+        if (alarmRequest.price) {
+            body.price = alarmRequest.price;
+        }
+
+        if (alarmRequest.startDateFrom) {
+            body.startDateFrom = alarmRequest.startDateFrom.toISOString();
+        }
+
+        if (alarmRequest.startDateTo) {
+            body.startDateTo = alarmRequest.startDateTo.toISOString();
+        }
+
+        return this.http.post<Alarm>(`${environment.apiUrl}/alarms`, body);
+    }
 
     getAll(page: number = 0, size: number = 50) {
         const params: any = { page, size };

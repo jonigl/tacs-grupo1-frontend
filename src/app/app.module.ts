@@ -53,6 +53,7 @@ import { AccountSavedSnackBarComponent } from './account/account-saved-snack-bar
 import { RegistrationComponent } from './registration/registration.component';
 import { UsersComponent } from './users/users.component';
 import { StatsComponent } from 'src/app/stats/stats.component';
+import { AlarmDialogComponent } from 'src/app/alarm/alarm-dialog/alarm-dialog.component';
 import { CompareUsersListsDialogComponent } from './users/compare-users-lists-dialog/compare-users-lists-dialog.component';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 
@@ -110,6 +111,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
         RegistrationComponent,
         UsersComponent,
         StatsComponent,
+        AlarmDialogComponent,
         CompareUsersListsDialogComponent
     ],
     entryComponents: [
@@ -119,6 +121,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
         EventDialogComponent,
         SearchElementDialogComponent,
         AccountSavedSnackBarComponent,
+        AlarmDialogComponent,
         CompareUsersListsDialogComponent
     ],
     providers: [
