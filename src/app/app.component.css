@@ -55,3 +55,7 @@ h1.example-app-name {
 .sidenav-menu a{
     color: #ffffff;
 }
+
+.mat-nav-list a.active {
+    background: #2e3f9e;
+}
