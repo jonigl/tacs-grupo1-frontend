@@ -12,7 +12,7 @@ export class EditListDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<EditListDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: List) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
     onNoClick(): void {
       this.dialogRef.close(false);

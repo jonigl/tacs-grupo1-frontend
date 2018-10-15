@@ -27,7 +27,7 @@ export class SearchElementDialogComponent implements OnInit, OnDestroy, AfterVie
 
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: Event,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private listService: ListService,
     public dialogRef: MatDialogRef<SearchElementDialogComponent>,
     private spinner: NgxSpinnerService,

@@ -15,7 +15,7 @@ import { ListService } from 'src/app/_services';
 })
 export class AlarmComponent implements OnInit {
 
-    private alarms: AlarmSummary[];
+    public alarms: AlarmSummary[];
     private events: Event[];
 
     private loadingAlarmIds: number[] = [];
