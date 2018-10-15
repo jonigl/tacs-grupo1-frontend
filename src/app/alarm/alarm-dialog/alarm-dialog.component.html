@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>New alarm</h1>
+
+<div mat-dialog-content>
+
+    <form class="new-alarm-form" [formGroup]="alarmFormGroup" (ngSubmit)="onSubmit()">
+
+        <mat-form-field class="full-width">
+            <input matInput class="name-input" formControlName="nameControl" placeholder="Name" cdkFocusInitial>
+            <mat-error *ngIf="nameControl.invalid">Alarm name is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput class="keyword-input" formControlName="keywordControl" placeholder="Keyword">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput class="address-input" formControlName="addressControl" placeholder="Location address">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput class="price-input" formControlName="priceControl" placeholder="Price">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput (dateChange)="setDateFrom($event)" [matDatepicker]="dateFromPicker" placeholder="From date">
+            <mat-datepicker-toggle matSuffix [for]="dateFromPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateFromPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput (dateChange)="setDateTo($event)" [matDatepicker]="dateToPicker" placeholder="To date">
+            <mat-datepicker-toggle matSuffix [for]="dateToPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateToPicker></mat-datepicker>
+        </mat-form-field>
+
+    </form>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="alarmFormGroup.invalid">Create</button>
+</div>
+

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { AlarmSummary, Event } from 'src/app/_models';
 import { AlarmService } from 'src/app/_services/alarm.service';
 import { first } from 'rxjs/internal/operators/first';
@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { EventDialogComponent } from 'src/app/list/event-dialog/event-dialog.component';
 import { SearchElementDialogComponent } from 'src/app/reusable/search-element-dialog/search-element-dialog.component';
 import { ListService } from 'src/app/_services';
+import { AlarmDialogComponent } from 'src/app/alarm/alarm-dialog/alarm-dialog.component';
 
 @Component({
     selector: 'app-alarm',
@@ -16,7 +17,7 @@ import { ListService } from 'src/app/_services';
 export class AlarmComponent implements OnInit {
 
     private alarms: AlarmSummary[];
-    private events: Event[];
+    private events: Map<number, Event[]> = new Map();
 
     private loadingAlarmIds: number[] = [];
 
@@ -25,21 +26,30 @@ export class AlarmComponent implements OnInit {
     constructor(
         private spinner: NgxSpinnerService,
         public dialog: MatDialog,
+        private snackbar: MatSnackBar,
         private alarmService: AlarmService,
         private listService: ListService) { }
 
     ngOnInit() {
+        this.initAlarms();
+    }
+
+    initAlarms() {
         this.spinner.show();
         this.alarmService.getToday()
             .pipe(first())
             .subscribe(page => {
                 this.alarms = page.content;
                 this.spinner.hide();
+
+                if (page.total <= 0) {
+                    this.snackbar.open(`You don't have any alarms.`, '', { duration: 3000 });
+                }
             });
     }
 
     initEvents(alarm: AlarmSummary) {
-        if (this.events) {
+        if (this.events.get(alarm.id)) {
             return;
         }
 
@@ -48,7 +58,7 @@ export class AlarmComponent implements OnInit {
         this.alarmService.fetch(alarm.id)
             .pipe(first())
             .subscribe(page => {
-                this.events = page.content;
+                this.events.set(alarm.id, page.content);
 
                 const index = this.loadingAlarmIds.indexOf(alarm.id);
                 if (index !== -1) {
@@ -61,19 +71,31 @@ export class AlarmComponent implements OnInit {
         return this.loadingAlarmIds.includes(alarm.id);
     }
 
+    openAddAlarmDialog() {
+        const dialogRef = this.dialog.open(AlarmDialogComponent, {
+            width: '500px',
+            data: { event }
+        });
+
+        dialogRef.afterClosed().subscribe(created => {
+            if (created) {
+                this.events.clear();
+                this.initAlarms();
+            }
+        });
+    }
+
     openEventDialog(index, event): void {
         const dialogRef = this.dialog.open(EventDialogComponent, {
             width: '500px',
-            data: { event: event }
+            data: { event }
         });
     }
 
     openAddEventDialog(event): void {
         const dialogRef = this.dialog.open(SearchElementDialogComponent, {
             width: '500px',
-            data: {
-                event: event
-            }
+            data: { event }
         });
         dialogRef.afterClosed().subscribe(list => {
             if (list) {

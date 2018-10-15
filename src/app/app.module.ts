@@ -51,6 +51,7 @@ import { AccountSavedSnackBarComponent } from './account/account-saved-snack-bar
 import { RegistrationComponent } from './registration/registration.component';
 import { UsersComponent } from './users/users.component';
 import { StatsComponent } from 'src/app/stats/stats.component';
+import { AlarmDialogComponent } from 'src/app/alarm/alarm-dialog/alarm-dialog.component';
 
 @NgModule({
     imports: [
@@ -103,7 +104,8 @@ import { StatsComponent } from 'src/app/stats/stats.component';
         AccountSavedSnackBarComponent,
         RegistrationComponent,
         UsersComponent,
-        StatsComponent
+        StatsComponent,
+        AlarmDialogComponent
     ],
     entryComponents: [
         EditListDialogComponent,
@@ -111,7 +113,8 @@ import { StatsComponent } from 'src/app/stats/stats.component';
         NewListDialogComponent,
         EventDialogComponent,
         SearchElementDialogComponent,
-        AccountSavedSnackBarComponent
+        AccountSavedSnackBarComponent,
+        AlarmDialogComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

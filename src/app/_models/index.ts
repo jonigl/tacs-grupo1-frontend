@@ -7,4 +7,5 @@ export * from './EventFilter';
 export * from './EventId';
 export * from './Alarm';
 export * from './AlarmSummary';
+export * from './AlarmRequest';
 export * from './TotalUsers';
