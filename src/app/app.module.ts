@@ -36,7 +36,9 @@ import {
     MatProgressBarModule,
     MatSnackBarModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCheckboxModule,
+    MatStepperModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';
@@ -51,6 +53,8 @@ import { AccountSavedSnackBarComponent } from './account/account-saved-snack-bar
 import { RegistrationComponent } from './registration/registration.component';
 import { UsersComponent } from './users/users.component';
 import { StatsComponent } from 'src/app/stats/stats.component';
+import { CompareUsersListsDialogComponent } from './users/compare-users-lists-dialog/compare-users-lists-dialog.component';
+import { CdkStepperModule } from '@angular/cdk/stepper';
 
 @NgModule({
     imports: [
@@ -84,7 +88,9 @@ import { StatsComponent } from 'src/app/stats/stats.component';
         MatSnackBarModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        NgxMatSelectSearchModule
+        NgxMatSelectSearchModule,
+        MatCheckboxModule,
+        MatStepperModule
     ],
     declarations: [
         AppComponent,
@@ -103,7 +109,8 @@ import { StatsComponent } from 'src/app/stats/stats.component';
         AccountSavedSnackBarComponent,
         RegistrationComponent,
         UsersComponent,
-        StatsComponent
+        StatsComponent,
+        CompareUsersListsDialogComponent
     ],
     entryComponents: [
         EditListDialogComponent,
@@ -111,7 +118,8 @@ import { StatsComponent } from 'src/app/stats/stats.component';
         NewListDialogComponent,
         EventDialogComponent,
         SearchElementDialogComponent,
-        AccountSavedSnackBarComponent
+        AccountSavedSnackBarComponent,
+        CompareUsersListsDialogComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

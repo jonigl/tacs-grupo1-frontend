@@ -29,7 +29,7 @@
                 <div *ngIf="isUser()">
                     <a mat-list-item routerLink="/">Home</a>
                     <a mat-list-item routerLink="/search">Search Events</a>
-                    <a mat-list-item [routerLink]="['/lists']">My Lists</a>
+                    <a mat-list-item routerLink="/lists">My Lists</a>
                     <a mat-list-item routerLink="/alarms">My Alarms</a>
                     <a mat-list-item routerLink="/account">Account</a>
                 </div>
@@ -38,8 +38,7 @@
                 <div *ngIf="isAdmin()">
                     <a mat-list-item routerLink="/">Home</a>
                     <a mat-list-item routerLink="/users">Users</a>
-                    <a mat-list-item href="/stats">Stats</a>
-                    <a mat-list-item href="#">Compare Lists</a>
+                    <a mat-list-item routerLink="/stats">Stats</a>                    
                 </div>
             </mat-nav-list>
         </mat-sidenav>

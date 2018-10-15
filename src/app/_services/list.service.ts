@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 import { RestPage, List, Event, EventId } from '../_models';
@@ -34,8 +34,15 @@ export class ListService {
     }
 
     addEvent(list: List, event: Event) {
-        const eventId: EventId = { id : event.id };
+        const eventId: EventId = { id: event.id };
         return this.http.post<Event>(`${environment.apiUrl}/lists/${list.id}/events/`, eventId);
+    }
+
+    compare(list1: List, list2: List) {
+        const params = new HttpParams()
+            .set('list1', list1.id.toString())
+            .set('list2', list2.id.toString());
+        return this.http.get<RestPage<Event>>(`${environment.apiUrl}/lists/compare`, { params });
     }
 
 }
