@@ -17,7 +17,7 @@ import { DeleteDialogComponent } from '../reusable/delete-dialog/delete-dialog.c
 })
 export class AlarmComponent implements OnInit {
 
-    private alarms: AlarmSummary[];
+    alarms: AlarmSummary[];
     private events: Map<number, Event[]> = new Map();
 
     private loadingAlarmIds: number[] = [];

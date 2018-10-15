@@ -12,9 +12,9 @@ import { first } from 'rxjs/internal/operators/first';
 })
 export class AlarmDialogComponent implements OnInit {
 
-    private alarmFormGroup: FormGroup;
+    alarmFormGroup: FormGroup;
 
-    private nameControl: FormControl = new FormControl('', Validators.required);
+    nameControl: FormControl = new FormControl('', Validators.required);
     private keywordControl: FormControl = new FormControl('');
     private addressControl: FormControl = new FormControl('');
     private priceControl: FormControl = new FormControl('');
