@@ -10,7 +10,7 @@ export class EventDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<EventDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Event) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
     displayedColumns: string[];
 
     onNoClick(): void {

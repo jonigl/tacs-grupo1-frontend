@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User, UserRequest, RestPage } from 'src/app/_models';
+import { User, UserRequest, RestPage, List } from 'src/app/_models';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
 
@@ -35,4 +35,8 @@ export class UserService {
     getTotalLists(user: User) {
         return this.http.get<any>(`${environment.apiUrl}/users/${user.id}/total_lists`);
     }
+
+    getUserLists(user: User): any {
+        return this.http.get<RestPage<List>>(`${environment.apiUrl}/users/${user.id}/lists`);
+      }
 }

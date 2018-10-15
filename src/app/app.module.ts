@@ -36,7 +36,9 @@ import {
     MatProgressBarModule,
     MatSnackBarModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCheckboxModule,
+    MatStepperModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditListDialogComponent } from './list/edit-list-dialog/edit-list-dialog.component';
@@ -52,6 +54,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import { UsersComponent } from './users/users.component';
 import { StatsComponent } from 'src/app/stats/stats.component';
 import { AlarmDialogComponent } from 'src/app/alarm/alarm-dialog/alarm-dialog.component';
+import { CompareUsersListsDialogComponent } from './users/compare-users-lists-dialog/compare-users-lists-dialog.component';
+import { CdkStepperModule } from '@angular/cdk/stepper';
 
 @NgModule({
     imports: [
@@ -85,7 +89,9 @@ import { AlarmDialogComponent } from 'src/app/alarm/alarm-dialog/alarm-dialog.co
         MatSnackBarModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        NgxMatSelectSearchModule
+        NgxMatSelectSearchModule,
+        MatCheckboxModule,
+        MatStepperModule
     ],
     declarations: [
         AppComponent,
@@ -105,7 +111,8 @@ import { AlarmDialogComponent } from 'src/app/alarm/alarm-dialog/alarm-dialog.co
         RegistrationComponent,
         UsersComponent,
         StatsComponent,
-        AlarmDialogComponent
+        AlarmDialogComponent,
+        CompareUsersListsDialogComponent
     ],
     entryComponents: [
         EditListDialogComponent,
@@ -114,7 +121,8 @@ import { AlarmDialogComponent } from 'src/app/alarm/alarm-dialog/alarm-dialog.co
         EventDialogComponent,
         SearchElementDialogComponent,
         AccountSavedSnackBarComponent,
-        AlarmDialogComponent
+        AlarmDialogComponent,
+        CompareUsersListsDialogComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
