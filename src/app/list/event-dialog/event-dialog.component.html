@@ -7,16 +7,16 @@
   <a [attr.href]="data.event.url" target="_blank" [title]="data.event.name">link</a>
 
   <h4>Start date</h4>
-  <p>{{ data.event.start }}</p>
+  <p>{{ data.event.start  | date:'medium' }}</p>
 
   <h4>End date</h4>
-  <p>{{ data.event.end }}</p>
+  <p>{{ data.event.end  | date:'medium' }}</p>
 
   <h4>Created date</h4>
-  <p>{{ data.event.created }}</p>
+  <p>{{ data.event.created  | date:'medium' }}</p>
 
   <h4>Changed date</h4>
-  <p>{{ data.event.changed }}</p>
+  <p>{{ data.event.changed  | date:'medium' }}</p>
 
   <h4>Status</h4>
   <p>{{ data.event.status }}</p>
