@@ -75,13 +75,21 @@ export class RegistrationComponent implements OnInit {
   onSubmit() {
     if (this.registrationForm.valid) {
       this.spinner.show();
-      this.userService.create(this.getUser()).pipe(first()).subscribe(response => {
-        this.spinner.hide();
-        this.snackbar.open('Successfully registered user!', '', { duration: 1000 });
-        setTimeout(() => {
-          this.router.navigate(['login']);
-        }, 3000);
-      });
+      this.userService
+        .create(this.getUser())
+        .pipe(first())
+        .subscribe(
+          response => {
+            this.spinner.hide();
+            this.snackbar.open('Successfully registered user!', '', { duration: 1000 });
+            setTimeout(() => {
+              this.router.navigate(['login']);
+            }, 3000);
+          },
+          error => {
+            this.snackbar.open('User already exist!', '', { duration: 1000 });
+          }
+        );
     }
   }
 
