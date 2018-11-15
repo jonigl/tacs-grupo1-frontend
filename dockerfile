@@ -1,7 +1,7 @@
 #sudo docker build -t tacs-frontend:1.0.0 .
 #docker run -d -p 8080:80 tacs-frontend:1.0.0
 
-FROM node:10-alpine AS builder  
+FROM node:10-alpine AS builder
 WORKDIR /build
 COPY package.json .
 RUN npm install 
