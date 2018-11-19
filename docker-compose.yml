@@ -1,0 +1,7 @@
+#docker-compose up
+version: '3.7'
+services:
+  frontend:
+    image: "jonigl/tacs-grupo1-frontend:1.0.0"
+    ports:
+     - "8080:80"
